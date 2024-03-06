@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from products import views as productViews
+from accounts import views as accountViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +26,7 @@ urlpatterns = [
     path('updateProduct/<int:pk>', productViews.update_product_view,name='updateProduct'),
     path('deleteProduct/<int:pk>', productViews.delete_product_view,name='deleteProduct'),
     
-    
+    path('signupAccount/', accountViews.signup_account_view,name='signupAccount'),
+    path('logoutAccount/', accountViews.logout_account_view,name='logoutAccount'),
+    path('loginAccount/', accountViews.login_account_view,name='loginAccount'),
 ]
