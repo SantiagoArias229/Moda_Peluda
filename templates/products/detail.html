@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<style>
+  h5,h2 {
+    font-size: 2.5rem;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.4;
+    text-transform: none;
+  }
+
+  h2 {
+    font-size: 2.0rem;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.4;
+    text-transform: none;
+  }
+  
+</style>
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <div class="card-body">
+        <div class="card border-0">
+          <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded-start" style="width: 400px; height: 400px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="fw-bold">
+          {{product.name}}
+        </h5>
+        <h2>${{product.price}} COP</h2> 
+        <p class="card-text">{{product.description}}</p> 
+        
+        <p class="card-text">{{product.category}}</p>
+        <p class="card-text">{{product.quantity}}</p> 
+        
+        <form method="POST" action="{% url 'updateProduct' pk=product.id%}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Modificar producto</button>
+        </form>
+        <form method="POST" action="{% url 'deleteProduct' pk=product.id%}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Borrar producto</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  <script>
+    var cantidad = 1;  // Inicializa la cantidad
+
+    function reduceCantidad() {
+      if (cantidad > 1) {
+        cantidad--;
+        actualizarPrecio();
+        actualizarCantidad();
+      }
+    }
+
+    function aumentaCantidad() {
+      cantidad++;
+      actualizarPrecio();
+      actualizarCantidad();
+    }
+
+    function actualizarPrecio() {
+      // Puedes ajustar la lógica para actualizar el precio según la cantidad
+      var nuevoPrecio = cantidad * {{ producto.precio }};
+      document.getElementById('precio').innerText = nuevoPrecio.toFixed(2);
+    }
+
+    function actualizarCantidad() {
+      document.getElementById('cantidad').innerText = cantidad;
+    }
+
+    function agregarAlCarrito() {
+      // Aquí puedes agregar la lógica para agregar el producto al carrito
+      alert("Producto agregado al carrito");
+    }
+  </script>
+{% endblock %}

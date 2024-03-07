@@ -2,379 +2,151 @@
 {% load static %}
 {% block content %}
 
-
-
-  <style media="screen">
-    body,
-html {
-  height: 100%;
-}
-
-.d-flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.align-center {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.flex-centerY-centerX {
-  justify-content: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-body {
-  background-color:#f7f7f7;
-}
-
-.page-wrapper {
-  height: 100%;
-  display: table;
-}
-
-.page-wrapper .page-inner {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.el-wrapper {
-  width: 360px;
-  padding: 15px;
-  margin: 15px auto;
-  background-color: #fff;
-  border-radius: 15px;
-}
-
-@media (max-width: 991px) {
-  .el-wrapper {
-    width: 345px;
+<style media="screen">
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-t
+    background-color: #f7f7f7;
   }
-}
 
-@media (max-width: 767px) {
-  .el-wrapper {
-    width: 290px;
-    margin: 30px auto;
+  .page-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-}
 
-.el-wrapper:hover .h-bg {
-  left: 0px;
-}
+  .el-wrapper {
+    position: relative;
+    width: 360px;
+    margin: 15px;
+    background-color: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
 
-.el-wrapper:hover .price {
-  left: 20px;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  color: #f3f3f3;
-}
+  .el-wrapper:hover {
+    transform: scale(1.05);
+  }
 
-.el-wrapper:hover .add-to-cart {
-  left: 50%;
-}
+  .el-img {
+    overflow: hidden;
+    position: relative;
+  }
 
-.el-wrapper:hover .img {
-  webkit-filter: blur(7px);
-  -o-filter: blur(7px);
-  -ms-filter: blur(7px);
-  filter: blur(7px);
-  filter: progid:DXImageTransform.Microsoft.Blur(pixelradius='7', shadowopacity='0.0');
-  opacity: 0.4;
-}
-
-.el-wrapper:hover .info-inner {
-  bottom: 155px;
-}
-
-.el-wrapper:hover .a-size {
-  -webkit-transition-delay: 300ms;
-  -o-transition-delay: 300ms;
-  transition-delay: 300ms;
-  bottom: 50px;
-  opacity: 1;
-}
-
-.el-wrapper .box-down {
-  width: 100%;
-  height: 60px;
-  position: relative;
-  overflow: hidden;
-}
-
-.el-wrapper .box-up {
-  width: 100%;
-  height: 300px;
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-}
-
-.el-wrapper .img {
-  padding: 20px 0;
-  -webkit-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-}
-
-.h-bg {
-  -webkit-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  width: 660px;
-  height: 100%;
-  background-color: #3fcd7f;
-  position: absolute;
-  left: -659px;
-}
-
-.h-bg .h-bg-inner {
-  width: 50%;
-  height: 100%;
-  background-color: #464646;
-}
-
-.info-inner {
-  -webkit-transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  position: absolute;
-  width: 100%;
-  bottom: 10px;
-}
-
-.info-inner .p-name,
-.info-inner .p-company {
-  display: block;
-}
-
-.info-inner .p-name {
-  font-family: 'PT Sans', sans-serif;
-  font-size: 18px;
-  color: #252525;
-}
-
-.info-inner .p-company {
-  font-family: 'Lato', sans-serif;
-  font-size: 16px;
-  /* text-transform: uppercase; */
-  color: #fbfbfb;
-}
-
-.a-size {
-  -webkit-transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  position: absolute;
-  width: 100%;
-  bottom: -20px;
-  font-family: 'PT Sans', sans-serif;
-  color: #2b2b2b;
-  font-weight: 600;
-  opacity: 0;
-}
-
-.a-size .size {
-  color: #252525;
-}
-
-.cart {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  /* font-family: 'Lato', sans-serif; */
-  font-weight: 700;
-}
-
-.cart .price {
-  -webkit-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-delay: 100ms;
-  -o-transition-delay: 100ms;
-  transition-delay: 100ms;
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  font-size: 16px;
-  color: #252525;
-}
-
-.cart .add-to-cart {
-  -webkit-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  -o-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
-  /* ease-out */
-  -webkit-transition-delay: 100ms;
-  -o-transition-delay: 100ms;
-  transition-delay: 100ms;
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 110%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.cart .add-to-cart .txt {
-  font-size: 12px;
-  color: #fff;
-  letter-spacing: 0.045em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-* {
-  box-sizing: border-box;
-}
-
-/* Create three equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 10px;
-  height: 300px; /* Should be removed. Only for demonstration */
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column {
+  .el-img img {
     width: 100%;
+    height: 200px; /* Altura fija */
+    object-fit: contain; /* Ajuste para mostrar toda la imagen sin cortar */
+    transition: transform 0.3s;
   }
-}
 
-/* html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: "Helvetica", sans-serif;
-} */
-
-img {
-  max-width: 100%;
-}
-
-.slider-container{
-  height: 35%;
-  width: 100%;
-  position: relative;
-  overflow: hidden; 
-  text-align: center;
-}
-
-.menu {
-  position: absolute;
-  left: 0;
-  z-index: 900;
-  width: 100%;
-  bottom: 0;
-}
-
-.menu label {
-  cursor: pointer;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background: #fff;
-  border-radius: 50px;
-  margin: 0 .2em 1em;
-  &:hover {
-    background: red;
+  .btn-conocer-mas {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 15px;
+    background-color: #d8a58a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
   }
-}
 
-.slide {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 100%;
-  z-index: 10;
-  padding: 8em 1em 0;
-  background-size: cover;
-  background-position: 50% 50%;
-  transition: left 0s .75s;
-}
+  .el-img:hover .btn-conocer-mas {
+    opacity: 1;
+  }
 
-[id^="slide"]:checked + .slide {
-  left: 0;
-  z-index: 100;
-  transition: left .65s ease-out;
-}
+  .el-info {
+    text-align: center;
+    padding: 10px;
+  }
 
-.slide-1 {
-  background-image: url("{% static 'images/example.jpg' %}");
-}
+  .el-info h4,
+  .el-price {
+    margin: 0;
+    font-size: 1.8rem; /* Aumentar tamaño de letras */
+    color: #2b2b2b;
+  }
 
-  </style>
+  .el-info h4 {
+    text-transform: uppercase; /* Convertir a mayúsculas */
+    font-family: 'Montserrat', sans-serif; /* Fuente Montserrat */
+    font-weight: bold; /* Negrita */
+  }
+
+  .el-price {
+    font-weight: bold;
+    margin-top: 5px;
+  }
+
+  .slider-container{
+    height: 35%;
+    width: 100%;
+    position: relative;
+    overflow: hidden; 
+    text-align: center;
+  }
+
+  .slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 10;
+    padding: 8em 1em 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    transition: left 0s .75s;
+  }
+  
+  [id^="slide"]:checked + .slide {
+    left: 0;
+    z-index: 100;
+    transition: left .65s ease-out;
+  }
+  
+  .slide-1 {
+    background-image: url("{% static 'images/example2.jpg' %}");
+  }
+  .slide-2 {
+    background-image: url("{% static 'images/example1.jpg' %}");
+  }
+  .slide-3 {
+    background-image: url("{% static 'images/ecom-banner1.png' %}");
+  }
+  .slide-4 {
+    background-image: url("{% static 'images/ecom-banner3.jpg' %}");
+  }
+
+  .menu {
+    position: absolute;
+    left: 0;
+    z-index: 900;
+    width: 100%;
+    bottom: 0;
+  }
+  
+  .menu label {
+    cursor: pointer;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 50px;
+    margin: 0 .2em 1em;
+    &:hover {
+      background: red;
+    }
+  }
+</style>
 
 <div class="row">
   <div class="col-md-12">
@@ -389,59 +161,35 @@ img {
       <input id="slide-dot-1" type="radio" name="slides" checked>
         <div class="slide slide-1"></div>
       
-      <input id="slide-dot-2" type="radio" name="slides">
+      <input id="slide-dot-2" type="radio" name="slides" >
         <div class="slide slide-2"></div>
       
-      <input id="slide-dot-3" type="radio" name="slides">
+      <input id="slide-dot-3" type="radio" name="slides" >
         <div class="slide slide-3"></div>
-      <input id="slide-dot-4" type="radio" name="slides">
+      <input id="slide-dot-4" type="radio" name="slides" >
         <div class="slide slide-4"></div>
     </div>
   </div>
 </div>
-
-
-  {%if products%}
-  <h3 style="text-align:center; color:#3E454C;">{{word}}</h3>
-  <br>
-  
-  <!-- products data start -->
-  <div class="row">
-
-      {% for p in products %}
-      <!-- card1 -->
-      <div class="column">
-      <div class="container page-wrapper" style="width: 450px;">
-        <div class="page-inner">
-          <div class="row">
-            <div class="el-wrapper">
-              <div class="box-up">
-                <img class="img" src="{% static p.product_image.url %}" alt="product pic" height="300px" width="300px">
-                <div class="img-info">
-                  <div class="info-inner">
-                    <span style="background-color:#3e454c; color:fbfbfb;"class="p-company">{{p.name}}</span>
-
-                  </div>
-                  <div class="a-size">{{p.description}}</div>
-                </div>
-              </div>
-
-              <div class="box-down">
-                <div class="h-bg">
-                  <div class="h-bg-inner"></div>
-                </div>
-                <i>Precio c/u: </i>
-                  <span class="price">${{p.price}}</span>
-                    
-                </a>
-              </div>
-            </div>
+<div class="page-wrapper">
+  {% if products %}
+    {% for p in products %}
+      <div class="el-wrapper">
+        <div class="el-img">
+          <img src="{% static p.product_image.url %}" alt="product pic">
+          
+          <button class="btn-conocer-mas" onclick="window.location.href='{% url 'detail' pk=p.id %}'">Ver Detalles</button>          
+        </div>
+        <div class="el-info">
+          <h4>{{ p.name }}</h4>
+          <p>{{ p.description }}</p>
+          <div class="el-price">
+            ${{ p.price }} COP
           </div>
         </div>
       </div>
-      </div>
-
-  {% endfor %}
+    {% endfor %}
+  {% endif %}
 </div>
-{% endif%}
+
 {% endblock content %}

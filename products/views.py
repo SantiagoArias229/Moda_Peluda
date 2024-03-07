@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from . import forms,models
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -32,9 +32,22 @@ def delete_product_view(request,pk):
 def update_product_view(request,pk):
     product=models.Product.objects.get(id=pk)
     productForm=forms.ProductForm(instance=product)
-    if request.method=='POST':
-        productForm=forms.ProductForm(request.POST,request.FILES,instance=product)
-        if productForm.is_valid():
-            productForm.save()
+    if request.method == 'POST':
+        product_form = forms.ProductForm(request.POST, request.FILES, instance=product)
+        if product_form.is_valid():
+            product_form.save()
             return HttpResponseRedirect('..')
+    else:
+        # Al cargar la página, inicializa el formulario con los datos actuales del producto
+        product_form = forms.ProductForm(instance=product)
     return render(request,'products/updateProduct.html',{'productForm':productForm})
+
+
+def product_detail_view(request, pk):
+    try:
+        product = models.Product.objects.get(id=pk)
+    except models.Product.DoesNotExist:
+        # Manejo de error si el producto no existe
+        return HttpResponseNotFound("Producto no encontrado")
+
+    return render(request, 'products/detail.html', {'product': product})

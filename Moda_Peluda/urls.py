@@ -22,6 +22,7 @@ from accounts import views as accountViews
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',productViews.home_view,name=''),
+    path('detail/<int:pk>', productViews.product_detail_view,name='detail'),
     path('create/', productViews.crate_product_view, name='createProduct'),
     path('updateProduct/<int:pk>', productViews.update_product_view,name='updateProduct'),
     path('deleteProduct/<int:pk>', productViews.delete_product_view,name='deleteProduct'),
