@@ -17,7 +17,7 @@
     justify-content: center;
   }
 
-  .el-wrapper {
+  .item-wrapper {
     position: relative;
     width: 360px;
     margin: 15px;
@@ -28,23 +28,23 @@
     transition: transform 0.3s;
   }
 
-  .el-wrapper:hover {
+  .item-wrapper:hover {
     transform: scale(1.05);
   }
 
-  .el-img {
+  .item-image {
     overflow: hidden;
     position: relative;
   }
 
-  .el-img img {
+  .item-image img {
     width: 100%;
-    height: 200px; /* Altura fija */
-    object-fit: contain; /* Ajuste para mostrar toda la imagen sin cortar */
+    height: 200px; /* Fixed height */
+    object-fit: contain; /* Adjust to show the entire image without cropping */
     transition: transform 0.3s;
   }
 
-  .btn-conocer-mas {
+  .btn-learn-more {
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -59,29 +59,29 @@
     transition: opacity 0.3s;
   }
 
-  .el-img:hover .btn-conocer-mas {
+  .item-image:hover .btn-learn-more {
     opacity: 1;
   }
 
-  .el-info {
+  .item-info {
     text-align: center;
     padding: 10px;
   }
 
-  .el-info h4,
-  .el-price {
+  .item-info h4,
+  .item-price {
     margin: 0;
-    font-size: 1.8rem; /* Aumentar tamaño de letras */
+    font-size: 1.8rem; /* Increase font size */
     color: #2b2b2b;
   }
 
-  .el-info h4 {
-    text-transform: uppercase; /* Convertir a mayúsculas */
-    font-family: 'Montserrat', sans-serif; /* Fuente Montserrat */
-    font-weight: bold; /* Negrita */
+  .item-info h4 {
+    text-transform: uppercase; /* Convert to uppercase */
+    font-family: 'Montserrat', sans-serif; /* Montserrat font */
+    font-weight: bold; /* Bold */
   }
 
-  .el-price {
+  .item-price {
     font-weight: bold;
     margin-top: 5px;
   }
@@ -120,10 +120,10 @@
     background-image: url("{% static 'images/example1.jpg' %}");
   }
   .slide-3 {
-    background-image: url("{% static 'images/ecom-banner1.png' %}");
+    background-image: url("{% static 'images/example3.png' %}");
   }
   .slide-4 {
-    background-image: url("{% static 'images/ecom-banner3.jpg' %}");
+    background-image: url("{% static 'images/example4.jpg' %}");
   }
 
   .menu {
@@ -174,16 +174,16 @@
 <div class="page-wrapper">
   {% if products %}
     {% for p in products %}
-      <div class="el-wrapper">
-        <div class="el-img">
+      <div class="item-wrapper">
+        <div class="item-image">
           <img src="{% static p.product_image.url %}" alt="product pic">
           
-          <button class="btn-conocer-mas" onclick="window.location.href='{% url 'detail' pk=p.id %}'">Ver Detalles</button>          
+          <button class="btn-learn-more" onclick="window.location.href='{% url 'detail' pk=p.id %}'">Ver detalles</button>          
         </div>
-        <div class="el-info">
+        <div class="item-info">
           <h4>{{ p.name }}</h4>
           <p>{{ p.description }}</p>
-          <div class="el-price">
+          <div class="item-price">
             ${{ p.price }} COP
           </div>
         </div>

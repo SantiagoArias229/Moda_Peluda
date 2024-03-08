@@ -2,93 +2,166 @@
 {% load static %}
 {% block content %}
 
-<head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-</head>
 <style>
-  h5,h2 {
-    font-size: 2.5rem;
-    font-family: Montserrat, sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    line-height: 1.4;
-    text-transform: none;
-  }
 
-  h2 {
-    font-size: 2.0rem;
-    font-family: Montserrat, sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    line-height: 1.4;
-    text-transform: none;
-  }
-  
+    .top-margin {
+      margin-top: 70px; /* Adjust the top margin as needed */
+    }
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .action-buttons button {
+      width: calc(50% - 10px); 
+      border: none;
+      border-radius: 25px;
+      padding: 15px 0; 
+      font-size: 18px;
+      box-sizing: border-box; 
+    }
+
+    .action-buttons .quantity-buttons {
+      display: flex;
+      align-items: center; /* Align elements vertically within quantity-buttons */
+    }
+
+    .action-buttons #quantity {
+      color: #555;
+      padding: 12px;
+      border-radius: 5px;
+      margin: 0 10px; /* Adjust margin to the left and right of the number */
+    }
+
+    .action-buttons button.increaseQuantity,
+    .action-buttons button.decreaseQuantity {
+      background-color: #d8a48a;
+      color: #555;
+      padding: 6px 12px;
+      border-radius: 5px;
+    }
+
+    .action-buttons button.addToCart {
+      background-color: #d4d3d1;
+      color: #555;
+    }
+
+    .action-buttons button.addToCart:hover {
+      background-color: #cda09b;
+      color: #000;
+    }
+
+    .action-buttons button.buyNow {
+      background-color: #cda09b;
+      color: #000;
+    }
+
+    .action-buttons button.buyNow:hover {
+      /* Add hover styles as needed */
+    }
+
+    .product-body {
+      margin-left: 100px;
+      
+    }
+
+    .product-body img {
+      width: 300px;
+      height: 300px;
+      border-radius: 10px;
+    }
+
+    .product-body h5 {
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .product-body h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.9rem;
+      font-weight: bold;
+      margin-bottom: 60px;
+    }
+
+    .product-description {
+      text-align: center;
+      font-size: 1.7rem;
+      color: #000;
+    }
+
 </style>
+
+<div class="top-margin"></div>
 <div class="card mb-3">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <div class="card-body">
-        <div class="card border-0">
-          <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded-start" style="width: 400px; height: 400px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <div class="product-body">
+                <div class="card border-0">
+                    <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded-start">
+                </div>
+                <p class="product-description">{{ product.description }}</p>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="fw-bold">
-          {{product.name}}
-        </h5>
-        <h2>${{product.price}} COP</h2> 
-        <p class="card-text">{{product.description}}</p> 
-        
-        <p class="card-text">{{product.category}}</p>
-        <p class="card-text">{{product.quantity}}</p> 
-        
-        <form method="POST" action="{% url 'updateProduct' pk=product.id%}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-primary">Modificar producto</button>
-        </form>
-        <form method="POST" action="{% url 'deleteProduct' pk=product.id%}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Borrar producto</button>
-        </form>
-      </div>
+        <div class="col-md-8">
+            <div class="product-body">
+                <h5 class="fw-bold" style="font-size: 2.5rem;">
+                    {{ product.name }}
+                </h5>
+                <h2>${{ product.price }} COP</h2>
+                <div class="action-buttons mt-3">
+                    <div class="quantity-buttons">
+                        <button type="button" class="btn decreaseQuantity" onclick="reduceQuantity()">-</button>
+                        <span id="quantity" class="btn btn-outline-primary disabled">0</span>
+                        <button type="button" class="btn increaseQuantity" onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+                <div class="quantity-available">
+                    <p>Cantidad disponible: {{ product.quantity }}</p>
+                </div>
+                <div class="action-buttons mt-3">
+                    <button type="button" class="btn addToCart" >Añadir al carrito</button>
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="btn buyNow" >Comprar ahora</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-  <script>
-    var cantidad = 1;  // Inicializa la cantidad
 
-    function reduceCantidad() {
-      if (cantidad > 1) {
-        cantidad--;
-        actualizarPrecio();
-        actualizarCantidad();
-      }
+<script>
+    var quantity = 0;
+    var availableQuantity = {{ product.quantity }};
+    var quantityElement = document.getElementById('quantity');
+  
+    function reduceQuantity() {
+        if (quantity > 0) {
+            quantity--;
+            updateQuantity();
+        }
     }
-
-    function aumentaCantidad() {
-      cantidad++;
-      actualizarPrecio();
-      actualizarCantidad();
+  
+    function increaseQuantity() {
+        if (quantity < availableQuantity) {
+            quantity++;
+            updateQuantity();
+        } else {
+            // If the quantity is greater than available, do nothing
+        }
     }
-
-    function actualizarPrecio() {
-      // Puedes ajustar la lógica para actualizar el precio según la cantidad
-      var nuevoPrecio = cantidad * {{ producto.precio }};
-      document.getElementById('precio').innerText = nuevoPrecio.toFixed(2);
+  
+    function updateQuantity() {
+        quantityElement.innerText = quantity;
+  
+        // Add or remove the 'exceeded' class as needed
+        if (quantity > availableQuantity) {
+            quantityElement.classList.add('exceeded');
+        } else {
+            quantityElement.classList.remove('exceeded');
+        }
     }
-
-    function actualizarCantidad() {
-      document.getElementById('cantidad').innerText = cantidad;
-    }
-
-    function agregarAlCarrito() {
-      // Aquí puedes agregar la lógica para agregar el producto al carrito
-      alert("Producto agregado al carrito");
-    }
-  </script>
+</script>
 {% endblock %}
