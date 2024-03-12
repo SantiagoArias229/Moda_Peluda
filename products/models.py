@@ -9,4 +9,36 @@ class Product(models.Model):
     category = models.CharField(max_length = 70)
     quantity = models.IntegerField()
     def __str__(self):
-        return self.name
+        return str(self.name)
+    
+class Collar(models.Model):
+    
+    OPCIONES_MATERIAL = [
+        ('Algodón', 'Algodón'),
+        ('Poliéster', 'Poliéster'),
+        ('Cuero', 'Cuero'),
+        ('Metálico', 'Metálico'),
+    ]
+    
+    OPCIONES_COLOR = [
+        ('Negro', 'Negro'),
+        ('Blanco', 'Blanco'),
+        ('Rojo', 'Rojo'),
+        ('Azul', 'Azul'),
+        ('Verde', 'Verde'),
+        ('Rosado', 'Rosado'),
+        ('Morado', 'Morado'),
+    ]
+    
+    OPCIONES_TALLA = [
+        ('Pequeño', 'Pequeño'),
+        ('Mediano', 'Mediano'),
+        ('Grande', 'Grande'),
+    ]
+    
+    material = models.CharField(max_length=30, choices=OPCIONES_MATERIAL)
+    color = models.CharField(max_length=30, choices=OPCIONES_COLOR)
+    talla = models.CharField(max_length=30, choices=OPCIONES_TALLA)
+    
+    def __str__(self):
+        return self.id

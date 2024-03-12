@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
-from .forms import UserCreateForm
-
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.contrib.auth.forms import AuthenticationForm
+from .forms import UserCreateForm
+
+
 
 
 def signup_account_view(request):

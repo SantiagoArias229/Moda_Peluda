@@ -23,11 +23,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',productViews.home_view,name=''),
     path('detail/<int:pk>', productViews.product_detail_view,name='detail'),
-    path('create/', productViews.crate_product_view, name='createProduct'),
-    path('updateProduct/<int:pk>', productViews.update_product_view,name='updateProduct'),
-    path('deleteProduct/<int:pk>', productViews.delete_product_view,name='deleteProduct'),
+    path('create/', productViews.crate_product_view, name='create-product'),
+    path('update-product/<int:pk>', productViews.update_product_view,name='update-product'),
+    path('delete-product/<int:pk>', productViews.delete_product_view,name='delete-product'),
     
-    path('signupAccount/', accountViews.signup_account_view,name='signupAccount'),
-    path('logoutAccount/', accountViews.logout_account_view,name='logoutAccount'),
-    path('loginAccount/', accountViews.login_account_view,name='loginAccount'),
+    path('create-collar/', productViews.create_collar_view, name='create-collar'),
+    
+    path('signup-account/', accountViews.signup_account_view,name='signup-account'),
+    path('logout-account/', accountViews.logout_account_view,name='logout-account'),
+    path('login-account/', accountViews.login_account_view,name='login-account'),
 ]

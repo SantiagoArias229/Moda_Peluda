@@ -5,8 +5,9 @@
 <style>
 
     .top-margin {
-      margin-top: 70px; /* Adjust the top margin as needed */
+      margin-top: 70px;
     }
+
     .action-buttons {
       display: flex;
       justify-content: space-between;
@@ -24,14 +25,14 @@
 
     .action-buttons .quantity-buttons {
       display: flex;
-      align-items: center; /* Align elements vertically within quantity-buttons */
+      align-items: center;
     }
 
     .action-buttons #quantity {
       color: #555;
       padding: 12px;
       border-radius: 5px;
-      margin: 0 10px; /* Adjust margin to the left and right of the number */
+      margin: 0 10px; 
     }
 
     .action-buttons button.increaseQuantity,
@@ -55,10 +56,6 @@
     .action-buttons button.buyNow {
       background-color: #cda09b;
       color: #000;
-    }
-
-    .action-buttons button.buyNow:hover {
-      /* Add hover styles as needed */
     }
 
     .product-body {
@@ -121,12 +118,25 @@
                 <div class="quantity-available">
                     <p>Cantidad disponible: {{ product.quantity }}</p>
                 </div>
-                <div class="action-buttons mt-3">
-                    <button type="button" class="btn addToCart" >Añadir al carrito</button>
-                </div>
-                <div class="action-buttons">
-                    <button type="button" class="btn buyNow" >Comprar ahora</button>
-                </div>
+                {% if user.is_authenticated %}
+                  <div class="action-buttons mt-3">
+                    <a type="button" class="btn addToCart" href="{% url 'update-product' pk=product.id%}">Modificar producto</a>
+                  </div>
+                  <div class="action-buttons">
+                    <a type="button" class="btn alert-warning" href="{% url 'delete-product' pk=product.id%}">Eliminar producto</a>
+                  </div>
+                {% else %}
+                
+                  <div class="action-buttons mt-3">
+                      <button type="button" class="btn addToCart" >Añadir al carrito</button>
+                  </div>
+                  <div class="action-buttons">
+                      <button type="button" class="btn buyNow" >Comprar ahora</button>
+                  </div>
+                {% endif %}
+                {% if product.name == "Collar" %}
+                <a type="button" class="btn btn-primary" href="{% url 'create-collar' %}">Personalizar</a>
+                {% endif%}
             </div>
         </div>
     </div>
