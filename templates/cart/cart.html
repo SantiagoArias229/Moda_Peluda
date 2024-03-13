@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style media="screen">
+        .button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 28px;
+            padding: 20px;
+            width: 200px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+        
+        .button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+        
+        .button:hover span {
+            padding-right: 25px;
+        }
+        
+        .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+        
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+        }
+        
+        .button2:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+        
+    </style>
+</head>
+<br><br><br><br>
+
+<div class="container">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h6 style="text-align:center;" class="panel-title">My Cart</h6>
+        </div>
+        <table class="table table-hover table-bordered" id="dev-table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Descripcion</th>
+                    <th>🤮</th>
+                    
+                    
+                </tr>
+            </thead>
+            {% for p in products %}
+            {% if p %}
+            
+            <tr>
+                <td> {{p.name}}</td>
+                {% comment %} <td> <img src="{% static p.product_image.url %}" alt="Profile Pic" height="50px" width="50px" /></td> {% endcomment %}
+                <td>$ {{p.price}}</td>
+                <td>{{p.description}}</td>
+                <td><a type="button" href="{% url 'remove-from-cart' pk=p.id%}">Eliminar</a></td>
+                
+                
+                {% comment %} <td><a class="btn btn-danger btn-xs" href="{% url 'remove-from-cart' p.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td> {% endcomment %}
+                
+            </tr>
+            {%else%}
+            <br><br><br>
+            <h1>no products</h1>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<br><br><br>
+<div style="text-align: center;">
+    <button class="btn btn-danger btn-lg">Total ${{total}}</button>
+    <a href="/customer-address"><button class="btn btn-success btn-lg" ><span>Purchase </span></button></a>
+    <a href="" onclick="borrarCookies()" class="btn btn-lg">
+        <button class="btn btn btn-lg">
+            <span>Vaciar Carrito </span>
+        </button>
+    </a>
+</div> 
+
+
+<br><br><br><br><br>
+<script>
+    function borrarCookies() {
+        // Obtenemos todas las cookies
+        var cookies = document.cookie.split(";");
+
+        // Iteramos sobre todas las cookies y las eliminamos una por una
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var nombre = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = nombre + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+        }
+    }
+</script>
+{% endblock content %}

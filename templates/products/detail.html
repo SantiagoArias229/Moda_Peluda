@@ -128,7 +128,7 @@
                 {% else %}
                 
                   <div class="action-buttons mt-3">
-                      <button type="button" class="btn addToCart" >Añadir al carrito</button>
+                      <a type="button" href="{% url 'add-to-cart' pk=product.id%}" class="btn addToCart" >Añadir al carrito</a>
                   </div>
                   <div class="action-buttons">
                       <button type="button" class="btn buyNow" >Comprar ahora</button>

@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from products import views as productViews
 from accounts import views as accountViews
+from cart import views as cartViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,4 +33,8 @@ urlpatterns = [
     path('signup-account/', accountViews.signup_account_view,name='signup-account'),
     path('logout-account/', accountViews.logout_account_view,name='logout-account'),
     path('login-account/', accountViews.login_account_view,name='login-account'),
+    
+    path('add-to-cart/<int:pk>', cartViews.add_to_cart_view,name='add-to-cart'),
+    path('cart', cartViews.cart_view,name='cart'),
+    path('remove-from-cart/<int:pk>', cartViews.remove_from_cart_view,name='remove-from-cart'),
 ]
