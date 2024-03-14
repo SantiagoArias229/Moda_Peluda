@@ -71,6 +71,7 @@
             <thead>
                 <tr>
                     <th>Producto</th>
+                    <th>Cantidad</th>
                     <th>Precio</th>
                     <th>Descripcion</th>
                     <th>🤮</th>
@@ -83,6 +84,7 @@
             
             <tr>
                 <td> {{p.name}}</td>
+                <td> x</td>
                 {% comment %} <td> <img src="{% static p.product_image.url %}" alt="Profile Pic" height="50px" width="50px" /></td> {% endcomment %}
                 <td>$ {{p.price}}</td>
                 <td>{{p.description}}</td>

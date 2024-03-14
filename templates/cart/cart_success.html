@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+</style>
+
+
+<h3 class="fw-bold" style="font-size: 2.5rem;">
+    Producto Añadido Exitosamente
+</h3>
+<a type="button" href="{% url '' %}">Seguir Comprando</a>
+<div><br>
+<a type="button" href="{% url 'cart'%}">Ir al carrito</a>
+
+{% comment %} <h3>{{quantity}}</h3> {% endcomment %}
+
+{% endblock content %}

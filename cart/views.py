@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 # Create your views here.
 def add_to_cart_view(request,pk):
     products=Product.objects.all()
-    
+    quantity = request.GET.get('quantity', 1)
 
     #for cart counter, fetching products ids added by customer from cookies
     if 'product_ids' in request.COOKIES:
@@ -18,8 +18,9 @@ def add_to_cart_view(request,pk):
     else:
         product_count_in_cart=1
                                 #CAMBIARRRR PAGINA A REDIRECCIONAR
-    response = render(request, 'customer_home.html',{'products':products,'product_count_in_cart':product_count_in_cart,'msj':'Producto añadido al carrito'})
-
+    response = render(request, 'cart/cart_success.html',{'quantity':quantity})
+    #response = render(request, 'cart/cart_success.html',{'products':products,'product_count_in_cart':product_count_in_cart,'msj':'Producto añadido al carrito'})
+    
     #adding product id to cookies
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
@@ -32,11 +33,36 @@ def add_to_cart_view(request,pk):
         response.set_cookie('product_ids', pk)
 
     product=Product.objects.get(id=pk)
-    messages.info(request, product.name + ' added to cart successfully!')
+    #messages.info(request, product.name + ' added to cart successfully!')
 
+    #return redirect("..")
     return response
     
     
+# def cart_view(request):
+#     # Inicializar las variables
+#     products = None
+#     total = 0
+#     product_count_in_cart = 0
+
+#     # Obtener los IDs de los productos del carrito desde las cookies
+#     if 'product_ids' in request.COOKIES:
+#         product_ids = request.COOKIES['product_ids'].split('|')
+#         product_count_in_cart = len(set(product_ids))
+
+#         # Obtener los productos del carrito junto con sus cantidades
+#         products = []
+#         for product_id in product_ids:
+#             product = Product.objects.get(id=product_id)
+#             # Obtener la cantidad de este producto del parámetro 'quantity' en la URL
+#             quantity = int(request.GET.get('quantity', 4))
+#             # Calcular el precio total del producto (precio por cantidad)
+#             total_product_price = product.price * quantity
+#             total += total_product_price
+#             # Agregar el producto junto con la cantidad y el precio total a la lista de productos
+#             products.append({'product': product, 'quantity': quantity, 'total_product_price': total_product_price,'price':product.price})
+
+#     return render(request, 'cart/cart.html', {'products': products, 'total': total, 'product_count_in_cart': product_count_in_cart})
 
 
 def cart_view(request):
