@@ -11,4 +11,4 @@ class ProductForm(forms.ModelForm):
 class CollarForm(forms.ModelForm):
     class Meta:
         model=models.Collar
-        fields=['material','color','talla']
+        fields=['material','color','size', 'text_color', 'font_type', 'design']

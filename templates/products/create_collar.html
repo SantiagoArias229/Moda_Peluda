@@ -4,69 +4,74 @@
 
 <head>
     <style>
+        .top-margin {
+            margin-top: 70px;
+        }
 
-    .top-margin {
-        margin-top: 70px;
-    }
-    .product-body {
-        margin-left: 100px;
-        
-    }
-  
-    .product-body img {
-        width: 300px;
-        height: 300px;
-        border-radius: 10px;
-    }
-  
-    .product-body h5 {
-        font-family: 'Montserrat', sans-serif;
-        text-transform: uppercase;
-        font-weight: bold;
-        text-align: center;
-    }
+        .product-body {
+            margin-left: 100px;
+        }
 
-    .form-group label {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 18px;
-    }
+        .product-body img {
+            width: 300px;
+            height: 300px;
+            border-radius: 10px;
+        }
 
-    .form-group select {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 16px;
-        width: 100%;
-        max-width: 200px;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #fff;
-    }
+        .product-body h5 {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+        }
 
+        .form-group label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+        }
 
-    .form-group select option[disabled] {
-        display: none;
-    }
-    .form-group select option[selected] {
-        display: none;
-    }
+        .form-group select {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            width: 100%;
+            max-width: 200px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
 
-    button.save {
-        background-color: #cda09b;
-        color: #000;
-        width: calc(50% - 10px);
-        max-width: 180px; 
-        border: none;
-        border-radius: 25px;
-        padding: 15px 0; 
-        font-size: 15px;
-        box-sizing: border-box;
-    }
+        .form-group select option[disabled] {
+            display: none;
+        }
 
-    .button-container {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 20px;
-    }
+        .form-group select option[selected] {
+            display: none;
+        }
+
+        button.save {
+            background-color: #cda09b;
+            color: #000;
+            width: calc(50% - 10px);
+            max-width: 180px;
+            border: none;
+            border-radius: 25px;
+            padding: 15px 0;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        #id_design {
+            resize: none;
+            width: 200px;
+            height: 150px;
+        }
     </style>
 
 </head>
@@ -74,50 +79,89 @@
 <div class="col-md-4">
     <div class="product-body">
         <div class="card border-0">
-            <h5>{{ product.name}}</h5>
+            <h5>{{ product.name }}</h5>
             <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded-start">
         </div>
-    </div>
-</div>
-<div>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="container register-form">
-            <div class="form">
-                <div class="form-content">
-                    <div class="form-group">
-                        <label for="id_color">Color</label>
-                        <select name="color" id="id_color" required class="form-control">
-                            <option value="" disabled selected>Seleccionar color</option>
-                            {% for choice in collar_form.fields.color.choices %}
-                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_material">Material</label>
-                        <select name="material" id="id_material" required class="form-control">
-                            <option value="" disabled selected>Seleccionar material</option>
-                            {% for choice in collar_form.fields.material.choices %}
-                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_talla">Talla</label>
-                        <select name="talla" id="id_talla" required class="form-control">
-                            <option value="" disabled selected>Seleccionar talla</option>
-                            {% for choice in collar_form.fields.talla.choices %}
-                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="button-container">
-                        <button type="submit" class="btn save">Guardar selección</button>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container register-form">
+                <div class="form">
+                    <div class="form-content">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="id_color">Color</label>
+                                    <select name="color" id="id_color" required class="form-control">
+                                        <option value="" disabled selected>Seleccionar color</option>
+                                        {% for choice in collar_form.fields.color.choices %}
+                                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="id_material">Material</label>
+                                    <select name="material" id="id_material" required class="form-control">
+                                        <option value="" disabled selected>Seleccionar material</option>
+                                        {% for choice in collar_form.fields.material.choices %}
+                                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="id_size">Talla</label>
+                                    <select name="size" id="id_size" required class="form-control">
+                                        <option value="" disabled selected>Seleccionar talla</option>
+                                        {% for choice in collar_form.fields.size.choices %}
+                                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="id_text_color">Color de texto</label>
+                                    <select name="text_color" id="id_text_color" required class="form-control">
+                                        <option value="" disabled selected>Seleccionar color de texto</option>
+                                        {% for choice in collar_form.fields.text_color.choices %}
+                                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="id_font_type">Tipo de fuente</label>
+                                    <select name="font_type" id="id_font_type" required class="form-control">
+                                        <option value="" disabled selected>Seleccionar tipo de fuente</option>
+                                        {% for choice in collar_form.fields.font_type.choices %}
+                                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="id_design">Diseño</label>
+                                    <textarea name="design" id="id_design" required class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button type="submit" class="btn save">Guardar selección</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+</div>
+<div>
+    
 </div>
 {% endblock content %}

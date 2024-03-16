@@ -13,14 +13,14 @@ class Product(models.Model):
     
 class Collar(models.Model):
     
-    OPCIONES_MATERIAL = [
+    MATERIAL_OPTIONS = [
         ('Algodón', 'Algodón'),
         ('Poliéster', 'Poliéster'),
         ('Cuero', 'Cuero'),
         ('Metálico', 'Metálico'),
     ]
     
-    OPCIONES_COLOR = [
+    COLOR_OPTIONS = [
         ('Negro', 'Negro'),
         ('Blanco', 'Blanco'),
         ('Rojo', 'Rojo'),
@@ -30,15 +30,32 @@ class Collar(models.Model):
         ('Morado', 'Morado'),
     ]
     
-    OPCIONES_TALLA = [
+    SIZE_OPTIONS = [
         ('Pequeño', 'Pequeño'),
         ('Mediano', 'Mediano'),
         ('Grande', 'Grande'),
     ]
     
-    material = models.CharField(max_length=30, choices=OPCIONES_MATERIAL)
-    color = models.CharField(max_length=30, choices=OPCIONES_COLOR)
-    talla = models.CharField(max_length=30, choices=OPCIONES_TALLA)
+    TEXT_COLOR_OPTIONS = [
+        ('Negro', 'Negro'),
+        ('Rojo', 'Rojo'),
+        ('Azul', 'Azul'),
+        ('Verde', 'Verde'),
+        ('Rosado', 'Rosado'),
+        ('Morado', 'Morado'),
+    ]
     
+    FONT_TYPE_OPTIONS = [
+        ('Impact', 'Impact'),
+        ('Verdana', 'Verdana'),
+        ('Comic Sans MS', 'Comic Sans MS'),
+    ]
+    material = models.CharField(max_length=30, choices=MATERIAL_OPTIONS)
+    color = models.CharField(max_length=30, choices=COLOR_OPTIONS)
+    size = models.CharField(max_length=30, choices=SIZE_OPTIONS)
+    
+    text_color = models.CharField(max_length=30, choices=TEXT_COLOR_OPTIONS, null=True)
+    font_type = models.CharField(max_length=30, choices=FONT_TYPE_OPTIONS, null=True)
+    design = models.CharField(max_length= 100, null=True)
     def __str__(self):
-        return self.id
+        return str(self.id)

@@ -4,13 +4,12 @@ from django.contrib.auth.decorators import login_required
 from . import forms,models
 
 
-# Create your views here.
+
 def home_view(request):
     products=models.Product.objects.all()
     return render(request,'customer_home.html',{'products':products})
 
-##----------------------CUIDADO NO OLVIAR!!!!!!!!!!!!!!!!---------------------------------
-##CUANDO CREE EL LOGIN DE ADMIN SE HABILITA ESTA FUNCION @login_required(login_url='adminlogin')
+
 @login_required
 def crate_product_view(request):
     product_form=forms.ProductForm()
@@ -21,14 +20,14 @@ def crate_product_view(request):
         return HttpResponseRedirect('..')
     return render(request,'products/create_product.html',{'productForm':product_form})
 
-##----------------------CUIDADO NO OLVIAR!!!!!!!!!!!!!!!!---------------------------------
+
 @login_required
 def delete_product_view(request,pk):
     product=models.Product.objects.get(id=pk)
     product.delete()
     return HttpResponseRedirect('..')
 
-##----------------------CUIDADO NO OLVIAR!!!!!!!!!!!!!!!!---------------------------------
+
 @login_required
 def update_product_view(request,pk):
     product=models.Product.objects.get(id=pk)
@@ -45,13 +44,14 @@ def update_product_view(request,pk):
 
 
 def product_detail_view(request, pk):
+    collar = models.Collar.objects.all()
     try:
         product = models.Product.objects.get(id=pk)
     except models.Product.DoesNotExist:
         # Manejo de error si el producto no existe
         return HttpResponseNotFound("Producto no encontrado")
 
-    return render(request, 'products/detail.html', {'product': product})
+    return render(request, 'products/detail.html', {'product': product,'collar': collar})
 
 def create_collar_view(request):
     product = get_object_or_404(models.Product, pk=1)
@@ -59,7 +59,7 @@ def create_collar_view(request):
         collar_form = forms.CollarForm(request.POST, request.FILES)
         if collar_form.is_valid():
             collar_form.save()
-            return redirect('..')  # Redirecciona a donde desees
+            return redirect('..') 
     else:
         collar_form = forms.CollarForm()
     return render(request, 'products/create_collar.html', {'product': product, 'collar_form': collar_form})

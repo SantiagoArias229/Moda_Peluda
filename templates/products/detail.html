@@ -88,10 +88,23 @@
       color: #000;
     }
 
+    .personalize {
+      border-radius: 25px;
+      padding: 15px 25px;
+      background-color: #cda09b;
+      color: #000;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
 </style>
 
 <div class="top-margin"></div>
 <div class="card mb-3">
+  <a type="button" class="btn personalize" href="{% url 'create-collar' %}">Personalizar</a>
+
     <div class="row g-0">
         <div class="col-md-4">
             <div class="product-body">
@@ -99,6 +112,7 @@
                     <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded-start">
                 </div>
                 <p class="product-description">{{ product.description }}</p>
+
             </div>
         </div>
 
@@ -135,10 +149,32 @@
                   </div>
                 {% endif %}
                 {% if product.name == "Collar" %}
-                <a type="button" class="btn btn-primary" href="{% url 'create-collar' %}">Personalizar</a>
+                  <h2>Lista de Collares</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID del Collar</th>
+                                <th>Nombre del Collar</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for collar in collar %}
+                            <tr>
+                                <td>{{ collar.id }}</td>
+                                <td>Collar {{ collar.id }}</td>
+                                <td>
+                                  <a type="button" href="{% url 'add-to-cart' pk=product.id%}" class="btn addToCart" >Añadir al carrito</a>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 {% endif%}
             </div>
+            
         </div>
+        
     </div>
 </div>
 
