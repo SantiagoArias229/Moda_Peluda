@@ -19,6 +19,7 @@ from django.urls import path
 from products import views as productViews
 from accounts import views as accountViews
 from cart import views as cartViews
+from orders import views as orderViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,4 +38,9 @@ urlpatterns = [
     path('add-to-cart/<int:pk>', cartViews.add_to_cart_view,name='add-to-cart'),
     path('cart', cartViews.cart_view,name='cart'),
     path('remove-from-cart/<int:pk>', cartViews.remove_from_cart_view,name='remove-from-cart'),
+
+    path('checkout', orderViews.create_order,name='checkout'),
+    path('checkout/confirmation/<int:order_id>/', orderViews.order_confirmation, name='order_confirmation'),
+
+
 ]

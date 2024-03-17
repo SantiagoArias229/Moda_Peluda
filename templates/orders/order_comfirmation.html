@@ -1,0 +1,27 @@
+<!-- order_confirmation.html -->
+{% extends "base.html" %}  
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmación de Orden</title>
+</head>
+<body>
+    <h1>Confirmación de Orden</h1>
+    <p>Orden ID: {{ order.id }}</p>
+    <p>Cliente: {{ order.customer_name }}</p>
+    <p>Dirección: {{ order.address }}</p>
+    <p>Email: {{ order.email }}</p>
+    <p>Tipo de Pago: {{ order.get_payment_type_display }}</p>
+
+    <h2>Productos:</h2>
+    <ul>
+        {% for product in products %}
+            <li>{{ product.name }} - {{ product.price }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
+{% endblock %}

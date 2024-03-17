@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+    .top-margin {
+      margin-top: 70px;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .action-buttons button {
+      width: calc(50% - 10px); 
+      border: none;
+      border-radius: 25px;
+      padding: 15px 0; 
+      font-size: 18px;
+      box-sizing: border-box; 
+    }
+
+    .action-buttons .quantity-buttons {
+      display: flex;
+      align-items: center;
+    }
+
+    .action-buttons #quantity {
+      color: #555;
+      padding: 12px;
+      border-radius: 5px;
+      margin: 0 10px; 
+    }
+
+    .action-buttons button.increaseQuantity,
+    .action-buttons button.decreaseQuantity {
+      background-color: #d8a48a;
+      color: #555;
+      padding: 6px 12px;
+      border-radius: 5px;
+    }
+
+    .action-buttons button.addToCart {
+      background-color: #d4d3d1;
+      color: #555;
+    }
+
+    .action-buttons button.addToCart:hover {
+      background-color: #cda09b;
+      color: #000;
+    }
+
+    .action-buttons button.buyNow {
+      background-color: #cda09b;
+      color: #000;
+    }
+
+    .product-body {
+      margin-left: 100px;
+      
+    }
+
+    .product-body img {
+      width: 300px;
+      height: 300px;
+      border-radius: 10px;
+    }
+
+    .product-body h5 {
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .product-body h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.9rem;
+      font-weight: bold;
+      margin-bottom: 60px;
+    }
+
+    .product-description {
+      text-align: center;
+      font-size: 1.7rem;
+      color: #000;
+    }
+
+    .personalize {
+      border-radius: 25px;
+      padding: 15px 25px;
+      background-color: #cda09b;
+      color: #000;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Orden</title>
+</head>
+<body>
+    <h1>Crear una nueva orden</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar Orden</button>
+    </form>
+</body>
+</html>
+{% endblock %}
