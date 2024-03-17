@@ -141,9 +141,9 @@
                   </div>
                 {% else %}
                 
-                  <div class="action-buttons mt-3">
-                      <a type="button" href="{% url 'add-to-cart' pk=product.id%}" class="btn addToCart" >Añadir al carrito</a>
-                  </div>
+                <div class="action-buttons mt-3">
+                  <button type="button" class="btn addToCart" onclick="addToCart()">Añadir al carrito</button>
+                </div>
                   <div class="action-buttons">
                       <button type="button" class="btn buyNow" >Comprar ahora</button>
                   </div>
@@ -209,5 +209,12 @@
             quantityElement.classList.remove('exceeded');
         }
     }
+    function addToCart() {
+      var quantity = document.getElementById('quantity').innerText; // Captura la cantidad seleccionada
+      var productId = '{{ product.id }}'; // Asegúrate de que esta variable esté disponible en tu script
+      
+      // Redirecciona a la URL con la cantidad como parámetro
+      window.location.href = `{% url 'add-to-cart' pk=product.id %}?quantity=` + quantity;
+  }
 </script>
 {% endblock %}

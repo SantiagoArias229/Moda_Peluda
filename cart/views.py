@@ -17,7 +17,6 @@ def add_to_cart_view(request,pk):
         product_count_in_cart=len(set(counter))
     else:
         product_count_in_cart=1
-                                #CAMBIARRRR PAGINA A REDIRECCIONAR
     response = render(request, 'cart/cart_success.html',{'quantity':quantity})
     #response = render(request, 'cart/cart_success.html',{'products':products,'product_count_in_cart':product_count_in_cart,'msj':'Producto añadido al carrito'})
     
