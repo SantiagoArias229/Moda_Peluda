@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ventas por Mes</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width: 60%; margin: auto;">
+        <canvas id="salesChart"></canvas>
+    </div>
+    <script>
+        // Parsea los datos de los meses y totales desde el contexto de Django
+        var months = JSON.parse('{{ months|safe }}');
+        var totals = JSON.parse('{{ totals|safe }}');
+
+        var ctx = document.getElementById('salesChart').getContext('2d');
+        var salesChart = new Chart(ctx, {
+            type: 'line', // Puedes cambiar esto a 'bar' si prefieres un gráfico de barras
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Órdenes Vendidas por Mes',
+                    data: totals,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}

@@ -5,6 +5,11 @@ from .forms import OrderForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from urllib.parse import unquote
+from django.db.models.functions import TruncMonth
+from django.core.serializers.json import DjangoJSONEncoder
+import json
+from django.db.models import Count
+from django.shortcuts import render
 
 
 def create_order(request):
@@ -68,3 +73,21 @@ def order_confirmation(request, order_id):
     context = {'order': order, 'products': products,'products_with_quantities': products_with_quantities,'total': total,'product_count_in_cart': product_count_in_cart}
     #context.delete_cookie('product_ids')
     return render(request, 'orders\order_comfirmation.html', context)
+
+def view_stadistics(request):
+
+
+    orders_per_month = Order.objects.annotate(month=TruncMonth('date')).values('month').annotate(total=Count('id')).order_by('month')
+
+    months = [order['month'].strftime("%Y-%m") for order in orders_per_month]
+    totals = [order['total'] for order in orders_per_month]
+
+    months_json = json.dumps(months, cls=DjangoJSONEncoder)
+    totals_json = json.dumps(totals, cls=DjangoJSONEncoder)
+
+    context = {
+        'months': months_json,
+        'totals': totals_json,
+    }
+
+    return render(request, 'orders\order_stadistics.html', context)
