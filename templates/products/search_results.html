@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<style>
+
+    .page-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    
+      .item-wrapper {
+        position: relative;
+        width: 360px;
+        margin: 15px;
+        background-color: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+    
+      .item-wrapper:hover {
+        transform: scale(1.05);
+      }
+    
+      .item-image {
+        overflow: hidden;
+        position: relative;
+      }
+    
+      .item-image img {
+        width: 100%;
+        height: 200px; 
+        object-fit: contain; 
+        transition: transform 0.3s;
+      }
+    
+      .btn-learn-more {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 8px 15px;
+        background-color: #d8a58a;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+    
+      .item-image:hover .btn-learn-more {
+        opacity: 1;
+      }
+    
+      .item-info {
+        text-align: center;
+        padding: 10px;
+      }
+    
+      .item-info h4,
+      .item-price {
+        margin: 0;
+        font-size: 1.8rem;
+        color: #2b2b2b;
+      }
+    
+      .item-info h4 {
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif; 
+        font-weight: bold; 
+      }
+    
+      .item-price {
+        font-weight: bold;
+        margin-top: 5px;
+      }
+
+
+</style>
+
+  <div class="page-wrapper">
+    {% if products %}
+      {% for p in products %}
+        <div class="item-wrapper">
+          <div class="item-image">
+            <img src="{% static p.product_image.url %}" alt="product pic">
+            
+            <button class="btn-learn-more" onclick="window.location.href='{% url 'detail' pk=p.id %}'">Ver detalles</button>          
+          </div>
+          <div class="item-info">
+            <h4>{{ p.name }}</h4>
+            <p>{{ p.description }}</p>
+            <div class="item-price">
+              ${{ p.price }} COP
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+
+  {% endblock content %}

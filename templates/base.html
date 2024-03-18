@@ -64,7 +64,45 @@
         .menu {
             cursor: pointer
         }
+        #navbar {
+            text-align: center; 
+          }
         
+          .navbar-search {
+            display: flex;
+            justify-content: center;
+            max-width: 600px; 
+            margin: auto; 
+          }
+        
+          .navbar-search form {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: center;
+          }
+        
+          .navbar-input {
+            padding: 10px 100px;
+            border-radius: 5px 0 0 5px;
+            border: 1px solid #ccc;
+            border-right: none;
+          }
+        
+          .navbar-button {
+            padding: 8px 15px;
+            background-color: #d8a58a;
+            color: #fff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+          }
+        
+          .navbar-input::placeholder {
+            /* Establece el ancho del marcador de posición al 100% */
+            width: 300px;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -96,23 +134,24 @@
                     <h2 style="margin:0px;"><a style="text-decoration:none; color:white;" href="/"><span class="largenav"><img src="{% static 'images/logo.png' %}" alt="Logo" width="100"></span></a></h2>
                 </div>
                 
-                <div class="navbar-search smallsearch col-sm-7 col-xs-11">
-                    <form  action="/search" method="get">
-                        <div class="row"> <input class="navbar-input col-xs-11" type="search" placeholder="Collares, pañoletas, Perro, Gato" name="query" id="query">
-                            <button class="navbar-button col-xs-1" type="submit">
-                                <svg width="15px" height="15px">
-                                    <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+
             </div>
         </div>
     </div>
 
     
-    
+    <div id="navbar">
+        <div class="navbar-search">
+          <form action="/search" method="get">
+            <input class="navbar-input" type="search" name="category" placeholder="Busqueda categoría. Ej: Accesorio" name="query" id="query">
+            <button class="navbar-button" type="submit">
+                <svg width="15px" height="15px">
+                    <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
+                </svg>
+            </button>
+        </form>
+        </div>
+      </div>
     <!-- content start-->
     {% block content %}
     

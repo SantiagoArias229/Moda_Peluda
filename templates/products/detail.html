@@ -103,8 +103,9 @@
 
 <div class="top-margin"></div>
 <div class="card mb-3">
-  {% comment %} <a type="button" class="btn personalize" href="{% url 'create-collar' %}">Personalizar</a> {% endcomment %}
-
+  {% if product.name == "Collar" %}
+    <a type="button" class="btn personalize" href="{% url 'create-collar' %}">Personalizar</a>
+  {% endif%}
     <div class="row g-0">
         <div class="col-md-4">
             <div class="product-body">
@@ -142,7 +143,6 @@
                 {% else %}
                 
                 <div class="action-buttons mt-3">
-                  <a type="button" href="{% url 'create-collar' %}" class="btn addToCart" >Personalizar</a>
                   <button type="button" class="btn addToCart" onclick="addToCart()">Añadir al carrito</button>
                 </div>
                   <div class="action-buttons">
@@ -166,8 +166,7 @@
                                 <td>Collar {{ collar.id }}</td>
                                 <td>
                                   <a type="button" href="{% url 'add-to-cart' pk=product.id%}" class="btn addToCart" >Añadir al carrito</a>
-                                  
-                                  
+
                             </tr>
                             {% endfor %}
                         </tbody>

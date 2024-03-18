@@ -63,3 +63,18 @@ def create_collar_view(request):
     else:
         collar_form = forms.CollarForm()
     return render(request, 'products/create_collar.html', {'product': product, 'collar_form': collar_form})
+
+
+def search_view(request):
+    query = request.GET.get('query')
+    category = request.GET.get('category')
+
+    products = None  # Inicializa como None
+    
+    if category and category.strip():  # Verifica si query no está vacío ni solo contiene espacios en blanco
+        if category:
+            products = models.Product.objects.filter(category__icontains=category)
+        else:
+            products = models.Product.objects.filter(name__icontains=query)
+
+    return render(request, 'products/search_results.html', {'products': products, 'query': query})
