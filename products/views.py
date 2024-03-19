@@ -2,12 +2,22 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from . import forms,models
-
+from django.db.models import Q
 
 
 def home_view(request):
-    products=models.Product.objects.all()
-    return render(request,'customer_home.html',{'products':products})
+    price_filter = request.GET.get('price', None)
+    queries = {
+        'menos10': Q(price__lt=10000),
+        '10a50': Q(price__gte=10000, price__lt=50000),
+        '50a80': Q(price__gte=50000, price__lt=80000),
+        '80a100': Q(price__gte=80000, price__lt=100000),
+        'mas100': Q(price__gte=100000),
+    }
+    query = queries.get(price_filter, Q())
+    products = models.Product.objects.filter(query)
+    
+    return render(request, 'customer_home.html', {'products': products})
 
 
 @login_required
@@ -38,7 +48,6 @@ def update_product_view(request,pk):
             product_form.save()
             return HttpResponseRedirect('..')
     else:
-        # Al cargar la página, inicializa el formulario con los datos actuales del producto
         product_form = forms.ProductForm(instance=product)
     return render(request,'products/update_product.html',{'productForm':product_form})
 
@@ -48,7 +57,6 @@ def product_detail_view(request, pk):
     try:
         product = models.Product.objects.get(id=pk)
     except models.Product.DoesNotExist:
-        # Manejo de error si el producto no existe
         return HttpResponseNotFound("Producto no encontrado")
 
     return render(request, 'products/detail.html', {'product': product,'collar': collar})
@@ -69,9 +77,9 @@ def search_view(request):
     query = request.GET.get('query')
     category = request.GET.get('category')
 
-    products = None  # Inicializa como None
+    products = None  
     
-    if category and category.strip():  # Verifica si query no está vacío ni solo contiene espacios en blanco
+    if category and category.strip():  
         if category:
             products = models.Product.objects.filter(category__icontains=category)
         else:

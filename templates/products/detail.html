@@ -45,12 +45,12 @@
     }
 
     .action-buttons button.addToCart:hover {
-      background-color: #cda09b;
+      background-color: #dcc79a;
       color: #000;
     }
 
     .action-buttons button.buyNow {
-      background-color: #cda09b;
+      background-color: #dcc79a;
       color: #000;
     }
 
@@ -87,7 +87,7 @@
     .personalize {
       border-radius: 25px;
       padding: 15px 25px;
-      background-color: #cda09b;
+      background-color: #dcc79a;
       color: #000;
       position: absolute;
       right: 0;
@@ -120,7 +120,7 @@
                 <div class="action-buttons mt-3">
                     <div class="quantity-buttons">
                         <button type="button" class="btn decreaseQuantity" onclick="reduceQuantity()">-</button>
-                        <span id="quantity" class="btn btn-outline-primary disabled">0</span>
+                        <span id="quantity" class="btn btn-outline-primary disabled">1</span>
                         <button type="button" class="btn increaseQuantity" onclick="increaseQuantity()">+</button>
                     </div>
                 </div>
@@ -128,23 +128,37 @@
                     <p>Cantidad disponible: {{ product.quantity }}</p>
                 </div>
                 {% if user.is_authenticated %}
-                  <div class="action-buttons mt-3">
-                    <a type="button" class="btn addToCart" href="{% url 'update-product' pk=product.id%}">Modificar producto</a>
-                  </div>
-                  <div class="action-buttons">
-                    <a type="button" class="btn alert-warning" href="{% url 'delete-product' pk=product.id%}">Eliminar producto</a>
-                  </div>
+                <div class="action-buttons mt-3">
+                  <a class="btn btn-outline-primary" href="{% url 'update-product' pk=product.id %}" role="button">
+                    <i class="fas fa-edit"></i> Modificar producto
+                  </a>
+                </div>
+                <div class="action-buttons mt-2">
+                  <a class="btn btn-outline-danger" href="{% url 'delete-product' pk=product.id %}" role="button" onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
+                    <i class="fas fa-trash-alt"></i> Eliminar producto
+                  </a>
+                </div>
+                
                 {% else %}
                 
-                <div class="action-buttons mt-3">
-                  <button type="button" class="btn addToCart" onclick="addToCart()">Añadir al carrito</button>
+                <div class="action-buttons mt-3 d-grid gap-2 d-md-block">
+                  <button type="button" class="btn btn-success" onclick="addToCart()">
+                    <i class="fas fa-cart-plus"></i> Añadir al carrito
+                  </button>
                   
-                  <button type="button" class="btn buyNow">Comprar ahora</button>
-                {% if product.name == "Collar" %}
-                    <a type="button" class="btn personalize" href="{% url 'create-collar' %}">Personalizar</a>
+                  <button type="button" class="btn btn-primary">
+                    <i class="fas fa-bolt"></i> Comprar ahora
+                  </button>
+                
+                  {% if product.name == "Collar" %}
+                    <a href="{% url 'create-collar' %}" class="btn btn-info" role="button">
+                      <i class="fas fa-paint-brush"></i> Personalizar
+                    </a>
                   {% endif %}
                 </div>
+                
                 {% endif %}
+              
                 {% if product.name == "Collar" %}
                   <h2>Lista de Collares</h2>
                     <table class="table">
@@ -161,7 +175,9 @@
                                 <td>{{ collar.id }}</td>
                                 <td>Collar {{ collar.id }}</td>
                                 <td>
-                                  <a type="button" href="{% url 'add-to-cart' pk=product.id%}" class="btn addToCart" >Añadir al carrito</a>
+                                  <a href="{% url 'add-to-cart' pk=product.id %}" class="btn btn-success" role="button">
+                                    <i class="fas fa-cart-plus"></i> Añadir al carrito
+                                </a>
 
                             </tr>
                             {% endfor %}
@@ -181,7 +197,7 @@
     var quantityElement = document.getElementById('quantity');
   
     function reduceQuantity() {
-        if (quantity > 0) {
+        if (quantity > 1) {
             quantity--;
             updateQuantity();
         }
@@ -207,10 +223,9 @@
         }
     }
     function addToCart() {
-      var quantity = document.getElementById('quantity').innerText; // Captura la cantidad seleccionada
-      var productId = '{{ product.id }}'; // Asegúrate de que esta variable esté disponible en tu script
+      var quantity = document.getElementById('quantity').innerText; 
+      var productId = '{{ product.id }}'; 
       
-      // Redirecciona a la URL con la cantidad como parámetro
       window.location.href = `{% url 'add-to-cart' pk=product.id %}?quantity=` + quantity;
   }
 </script>

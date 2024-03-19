@@ -71,8 +71,9 @@ def order_confirmation(request, order_id):
     
 
     context = {'order': order, 'products': products,'products_with_quantities': products_with_quantities,'total': total,'product_count_in_cart': product_count_in_cart}
-    #context.delete_cookie('product_ids')
-    return render(request, 'orders\order_comfirmation.html', context)
+    response = render(request, 'orders/order_comfirmation.html', context)
+    response.delete_cookie('product_ids')  
+    return response
 
 def view_stadistics(request):
 

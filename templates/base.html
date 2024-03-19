@@ -1,13 +1,15 @@
-<html>
-{% load static %}
+<!DOCTYPE html>
+<html lang="es">
 <head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- jQuery library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <title>Moda Peluda</title>
     <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png">
     
@@ -16,169 +18,78 @@
             background-color: #f7f7f7;
         }
         
-        #navbar {
+        .navbar-custom {
             background-color: #dcc79a;
-            color: black;
         }
         
-        .row1 {
-            padding-top: 10px;
-            padding-right: 50px
+        .navbar-brand img {
+            max-width: 100px;
         }
         
-        .row2 {
-            padding-bottom: 20px
+        .form-control {
+            border-radius: 30px 0 0 30px;
         }
         
-        .navbar-input {
-            padding: 11px 16px;
-            border-radius: 2px 0 0 2px;
-            border: 0 none;
-            outline: 0 none;
-            font-size: 15px
-        }
-        
-        .navbar-button {
+        .btn-custom {
+            border-radius: 0 30px 30px 0;
             background-color: #e5bc41;
-            border: 1px solid #e5bc41;
-            border-radius: 0 2px 2px 0;
-            color: #565656;
-            padding: 10px 0;
-            height: 43px;
-            cursor: pointer
-        }
-        
-        .largenav {
-            display: none
-        }
-        
-        .smallnav {
-            display: block
-        }
-        
-        .smallsearch {
-            margin-left: 15px;
-            margin-top: 15px
-        }
-        
-        .menu {
-            cursor: pointer
-        }
-        #navbar {
-            text-align: center; 
-          }
-        
-          .navbar-search {
-            display: flex;
-            justify-content: center;
-            max-width: 600px; 
-            margin: auto; 
-          }
-        
-          .navbar-search form {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            justify-content: center;
-          }
-        
-          .navbar-input {
-            padding: 10px 100px;
-            border-radius: 5px 0 0 5px;
-            border: 1px solid #ccc;
-            border-right: none;
-          }
-        
-          .navbar-button {
-            padding: 8px 15px;
-            background-color: #d8a58a;
-            color: #fff;
             border: none;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-          }
-        
-          .navbar-input::placeholder {
-            /* Establece el ancho del marcador de posición al 100% */
-            width: 300px;
-            text-align: left;
+            color: #565656;
         }
+        
+        /* Estilos adicionales según necesidades */
     </style>
 </head>
 <body>
-    
-    <div id="navbar">
-        <div class="container">
-            
-            <div class="row row1">
-                <div class="col-sm-3">
-                    <a href="/">
-                        <img src="{% static 'images/logo.png' %}" alt="Logo" width="100">
-                    </a>
-                </div>
-                <div class="col-sm-9 text-right">
-                    {% if user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'logout-account' %}"> Logout ({{ user.username }})
-                    <a class="nav-link" href="{% url 'stadistics' %}">Ver estadisticas</a>
-                       
-                    </a>
-                    <a class="nav-link" href="{% url 'signup-account' %}">Crear cuenta</a>
-                    <a class="nav-link" href="{% url 'create-product' %}">Crear producto</a>
-                {% else %}
-                    <a class="nav-link" href="{% url 'login-account' %}">Ingresar</a>
-                    <a class="nav-link" href="{% url 'cart' %}">Carrito</a>
-                {% endif %}
-                </div>
-            </div>
-            <div class="row row2">
-                <div class="col-sm-3">
-                    <h2 style="margin:0px;"><a style="text-decoration:none; color:white;" href="/"><span class="largenav"><img src="{% static 'images/logo.png' %}" alt="Logo" width="100"></span></a></h2>
-                </div>
-                
-
-            </div>
-        </div>
-    </div>
-
-    
-    <div id="navbar">
-        <div class="navbar-search">
-          <form action="/search" method="get">
-            <input class="navbar-input" type="search" name="category" placeholder="Busqueda categoría. Ej: Accesorio" name="query" id="query">
-            <button class="navbar-button" type="submit">
-                <svg width="15px" height="15px">
-                    <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
-                </svg>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'images/logo.png' %}" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-        </form>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout-account' %}">Logout ({{ user.username }})</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'signup-account' %}">Crear Administrador</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'stadistics' %}">Ver estadísticas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'create-product' %}">Crear producto</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login-account' %}">Administrador</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cart' %}">Carrito</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <form class="d-flex" action="/search" method="get">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Buscar categoría, ej: Accesorio" aria-label="Search">
+                    <button class="btn btn-custom" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
         </div>
-      </div>
-    <!-- content start-->
+    </nav>
+
+    <!-- Content Start -->
     {% block content %}
-    
     {% endblock content %}
-    <!-- content end-->
-    <br><br><br>
-    <footer>
-        <br>
-    </footer>
-    <script>
-        $(document).ready(function(){
-            
-            function openNav() {
-                document.getElementById("mySidenav").style.width = "70%";
-                
-                document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-            }
-            
-            function closeNav() {
-                document.getElementById("mySidenav").style.width = "0";
-                document.body.style.backgroundColor = "rgba(0,0,0,0)";
-            }
-            
-            
-        });
-    </script>
+    <!-- Content End -->
     
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

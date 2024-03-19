@@ -6,29 +6,21 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from urllib.parse import quote, unquote
 
+#Este codigo fue hecho por Luis Miguel Giraldo Gonzalez
 
 def add_to_cart_view(request, pk):
-    
     quantity = request.GET.get('quantity', 1)
     product = Product.objects.get(id=pk)
-
-    # Crear o actualizar la cookie de 'product_ids'
     product_cookie_value = f"{pk}:{quantity}"
     if 'product_ids' in request.COOKIES:
         product_ids = unquote(request.COOKIES['product_ids'])
         product_list = product_ids.split('|')
-        
-        # Inicializar la lista actualizada como vacía
         updated_product_list = []
-        
-        # Verificar si el producto ya está en el carrito y actualizar la cantidad
         product_found = False
         for item in product_list:
-            # Verificar si el item contiene el delimitador esperado ':'
             if ':' in item:
                 product_id, existing_quantity = item.split(':')
                 if product_id == str(pk):
-                    # Actualizar cantidad si el producto ya existe
                     item = f"{pk}:{quantity}"
                     product_found = True
             updated_product_list.append(item)
@@ -46,35 +38,6 @@ def add_to_cart_view(request, pk):
 
     print(request.COOKIES)
     return response
-
-
-    
-# def cart_view(request):
-#     # Inicializar las variables
-#     products = None
-#     total = 0
-#     product_count_in_cart = 0
-
-#     # Obtener los IDs de los productos del carrito desde las cookies
-#     if 'product_ids' in request.COOKIES:
-#         product_ids = request.COOKIES['product_ids'].split('|')
-#         product_count_in_cart = len(set(product_ids))
-
-#         # Obtener los productos del carrito junto con sus cantidades
-#         products = []
-#         for product_id in product_ids:
-#             product = Product.objects.get(id=product_id)
-#             # Obtener la cantidad de este producto del parámetro 'quantity' en la URL
-#             quantity = int(request.GET.get('quantity', 4))
-#             # Calcular el precio total del producto (precio por cantidad)
-#             total_product_price = product.price * quantity
-#             total += total_product_price
-#             # Agregar el producto junto con la cantidad y el precio total a la lista de productos
-#             products.append({'product': product, 'quantity': quantity, 'total_product_price': total_product_price,'price':product.price})
-
-#     return render(request, 'cart/cart.html', {'products': products, 'total': total, 'product_count_in_cart': product_count_in_cart})
-
-
 
 def cart_view(request):
     product_count_in_cart = 0
@@ -116,24 +79,23 @@ def remove_from_cart_view(request, pk):
         product_ids = unquote(request.COOKIES['product_ids'])
         product_id_list = product_ids.split('|')
         
-        # Revisar cada entrada y reconstruir la lista sin el producto a eliminar
+
         for item in product_id_list:
             product_id, quantity = item.split(':')
-            if int(product_id) != pk:  # Conservar solo si no es el producto a eliminar
+            if int(product_id) != pk: 
                 new_product_ids.append(f"{product_id}:{quantity}")
                 
-        # Rehacer la string de product_ids para la cookie
+
         new_product_ids_string = "|".join(new_product_ids)
 
-        # Preparar la respuesta y actualizar/eliminar la cookie
-        response = redirect('cart')  # Suponiendo que 'cart' es el nombre de la URL para la vista del carrito
+        
+        response = redirect('cart')  
         if new_product_ids_string:
-            response.set_cookie('product_ids', quote(new_product_ids_string))  # Actualizar la cookie
+            response.set_cookie('product_ids', quote(new_product_ids_string))  
         else:
-            response.delete_cookie('product_ids')  # Borrar la cookie si no hay más productos
+            response.delete_cookie('product_ids')  
 
         return response
     else:
-        # Si no hay productos, simplemente redirige al carrito o a otra página relevante
         return redirect('cart')
 

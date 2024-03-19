@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserCreateForm
 
 
-
+#Este codigo fue hecho por Luis Miguel Giraldo Gonzalez
 
 def signup_account_view(request):
     if request.method == 'GET':
