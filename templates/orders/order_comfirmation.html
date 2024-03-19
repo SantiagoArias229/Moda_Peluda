@@ -1,4 +1,3 @@
-<!-- order_confirmation.html -->
 {% extends "base.html" %}  
 {% block content %}
 <!DOCTYPE html>
@@ -6,53 +5,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Confirmación de Orden</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 </head>
 <body>
-    <h1>Confirmación de Orden</h1>
-    <p>Orden ID: {{ order.id }}</p>
-    <p>Cliente: {{ order.customer_name }}</p>
-    <p>Dirección: {{ order.address }}</p>
-    <p>Email: {{ order.email }}</p>
-    <p>Tipo de Pago: {{ order.get_payment_type_display }}</p>
+    <div id="orderConfirmation">
+        <h1>Confirmación de Orden</h1>
+        <p>Orden ID: {{ order.id }}</p>
+        <p>Cliente: {{ order.customer_name }}</p>
+        <p>Dirección: {{ order.address }}</p>
+        <p>Email: {{ order.email }}</p>
+        <p>Tipo de Pago: {{ order.get_payment_type_display }}</p>
 
-    <h2>Productos:</h2>
-    {% comment %} <ul>
-        {% for product in products %}
-            <li>{{ product.name }} - {{ product.price }}</li>
-        {% endfor %}
-    </ul> {% endcomment %}
-    <div class="card-body p-0">
-        <table class="table mb-0">
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Descripción</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for item in products_with_quantities %}
-                <tr>
-                    <td>{{ item.product.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>$ {{ item.product.price }}</td>
-                    <td>{{ item.product.description }}</td>
-                    <td>$ {{ item.subtotal }}</td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="6">No hay productos en el carrito.</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <h2>Productos:</h2>
+        <div class="card-body p-0">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Descripción</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in products_with_quantities %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>$ {{ item.product.price }}</td>
+                        <td>{{ item.product.description }}</td>
+                        <td>$ {{ item.subtotal }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">No hay productos en el carrito.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
         <div class="d-flex justify-content-between align-items-center mt-3">
             <h5>Total: ${{ total }}</h5>
-            <div>
+        </div>
     </div>
-
+    <button onclick="downloadConfirmation()">Descargar Confirmación</button>
+    <script>
+        function downloadConfirmation() {
+            html2canvas(document.getElementById("orderConfirmation")).then(function(canvas) {
+                var a = document.createElement('a');
+                a.href = canvas.toDataURL("image/png");
+                a.download = 'confirmacion-orden-' + '{{ order.id }}' + '.png';
+                a.click();
+            });
+        }
+    </script>
 </body>
 </html>
 {% endblock %}

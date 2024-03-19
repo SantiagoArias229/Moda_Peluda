@@ -118,9 +118,9 @@
                 </div>
                 <div class="col-sm-9 text-right">
                     {% if user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'logout-account' %}">
+                    <a class="nav-link" href="{% url 'logout-account' %}"> Logout ({{ user.username }})
                     <a class="nav-link" href="{% url 'stadistics' %}">Ver estadisticas</a>
-                        Logout ({{ user.username }})
+                       
                     </a>
                     <a class="nav-link" href="{% url 'signup-account' %}">Crear cuenta</a>
                     <a class="nav-link" href="{% url 'create-product' %}">Crear producto</a>
