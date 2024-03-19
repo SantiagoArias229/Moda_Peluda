@@ -1,8 +1,11 @@
+<!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
-
 {% block content %}
-
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Crear producto</title>
     <style media="screen">
       a:link {
         text-decoration: none;
@@ -44,58 +47,58 @@
         top: 50px;
       }
 
-      
+        
     </style>
   
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-
-
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <div class="container register-form">
-    <div class="form">
-      <div class="note">
-        <p>Añadir productos</p>
-      </div>
-      <div class="form-content">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="id_name">Nombre del producto</label>
-              {{ productForm.name }}
-            </div>
-            <div class="form-group">
-              <label for="id_description">Descripción</label>
-              {{ productForm.description }}
-            </div>
-            <div class="form-group">
-                <label for="id_price">Precio($)</label>
-                {{ productForm.price }}
-              </div>
+  </head>
+  <body>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="container register-form">
+        <div class="form">
+          <div class="note">
+            <p>Añadir productos</p>
           </div>
-          <div class="col-md-6">
-            
-            <div class="form-group">
-                <label for="id_category">Categoria</label>
-                {{ productForm.category }}
+          <div class="form-content">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="id_name">Nombre del producto</label>
+                  {{ productForm.name }}
+                </div>
+                <div class="form-group">
+                  <label for="id_description">Descripción</label>
+                  {{ productForm.description }}
+                </div>
+                <div class="form-group">
+                    <label for="id_price">Precio($)</label>
+                    {{ productForm.price }}
+                  </div>
+              </div>
+              <div class="col-md-6">
+                
+                <div class="form-group">
+                    <label for="id_category">Categoria</label>
+                    {{ productForm.category }}
+                </div>
+                <div class="form-group">
+                    <label for="id_quantity">Cantidad</label>
+                    {{ productForm.quantity }}
+                </div>
+                <div class="form-group">
+                  <label for="id_product_image">Imagen</label>
+                  {{ productForm.product_image }}
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-                <label for="id_quantity">Cantidad</label>
-                {{ productForm.quantity }}
-            </div>
-            <div class="form-group">
-              <label for="id_product_image">Imagen</label>
-              {{ productForm.product_image }}
-            </div>
+            <button type="submit" class="btnSubmit">AÑADIR</button>
           </div>
         </div>
-        <button type="submit" class="btnSubmit">AÑADIR</button>
       </div>
-    </div>
-  </div>
-</form>
-
+    </form>
+  </body>
+</html>
 {% endblock content %}

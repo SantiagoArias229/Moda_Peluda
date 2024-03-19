@@ -1,232 +1,241 @@
+<!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Detalle</title>
+    <style media="screen">
+      .top-margin {
+        margin-top: 70px;
+      }
 
-<style>
+      .action-buttons {
+        display: flex;
+        justify-content: start; 
+        align-items: center; 
+        gap: 10px; 
+      } 
 
-    .top-margin {
-      margin-top: 70px;
-    }
+      .action-buttons .button {
+        flex: 0 1 auto; 
+      }
 
-    .action-buttons {
-  display: flex;
-  justify-content: start; /* Alinea los elementos al inicio del contenedor */
-  align-items: center; /* Alinea los elementos verticalmente en el centro */
-  gap: 10px; /* Espacio entre los elementos */
-  } 
+      .action-buttons .quantity-buttons {
+        display: flex;
+        align-items: center;
+      }
 
-  .action-buttons .button {
-  flex: 0 1 auto; /* Permite que los botones tengan su tamaño contenido pero también puedan crecer si es necesario, sin ocupar todo el espacio disponible */
-}
+      .action-buttons #quantity {
+        color: #555;
+        padding: 12px;
+        border-radius: 5px;
+        margin: 0 10px; 
+      }
 
-    .action-buttons .quantity-buttons {
-      display: flex;
-      align-items: center;
-    }
+      .action-buttons button.increaseQuantity,
+      .action-buttons button.decreaseQuantity {
+        background-color: #d8a48a;
+        color: #555;
+        padding: 6px 12px;
+        border-radius: 5px;
+      }
 
-    .action-buttons #quantity {
-      color: #555;
-      padding: 12px;
-      border-radius: 5px;
-      margin: 0 10px; 
-    }
+      .action-buttons button.addToCart {
+        background-color: #d4d3d1;
+        color: #555;
+      }
 
-    .action-buttons button.increaseQuantity,
-    .action-buttons button.decreaseQuantity {
-      background-color: #d8a48a;
-      color: #555;
-      padding: 6px 12px;
-      border-radius: 5px;
-    }
+      .action-buttons button.addToCart:hover {
+        background-color: #dcc79a;
+        color: #000;
+      }
 
-    .action-buttons button.addToCart {
-      background-color: #d4d3d1;
-      color: #555;
-    }
+      .action-buttons button.buyNow {
+        background-color: #dcc79a;
+        color: #000;
+      }
 
-    .action-buttons button.addToCart:hover {
-      background-color: #dcc79a;
-      color: #000;
-    }
+      .product-body {
+        margin-left: 100px;
+        
+      }
 
-    .action-buttons button.buyNow {
-      background-color: #dcc79a;
-      color: #000;
-    }
+      .product-body img {
+        width: 300px;
+        height: 300px;
+        border-radius: 10px;
+      }
 
-    .product-body {
-      margin-left: 100px;
+      .product-body h5 {
+        font-family: 'Montserrat', sans-serif;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .product-body h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.9rem;
+        font-weight: bold;
+        margin-bottom: 60px;
+      }
+
+      .product-description {
+        font-size: 1.1rem;
+        color: #000;
+      }
+
+      .personalize {
+        border-radius: 25px;
+        padding: 15px 25px;
+        background-color: #dcc79a;
+        color: #000;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="top-margin"></div>
+    <div class="card mb-3">
       
-    }
-
-    .product-body img {
-      width: 300px;
-      height: 300px;
-      border-radius: 10px;
-    }
-
-    .product-body h5 {
-      font-family: 'Montserrat', sans-serif;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-
-    .product-body h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.9rem;
-      font-weight: bold;
-      margin-bottom: 60px;
-    }
-
-    .product-description {
-      text-align: center;
-      font-size: 1.7rem;
-      color: #000;
-    }
-
-    .personalize {
-      border-radius: 25px;
-      padding: 15px 25px;
-      background-color: #dcc79a;
-      color: #000;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-</style>
-
-<div class="top-margin"></div>
-<div class="card mb-3">
-  
-    <div class="row g-0">
-        <div class="col-md-4">
-            <div class="product-body">
-                <div class="card border-0">
-                    <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded-start">
-                </div>
-                <p class="product-description">{{ product.description }}</p>
-
-            </div>
-        </div>
-
-        <div class="col-md-8">
-            <div class="product-body">
-                <h5 class="fw-bold" style="font-size: 2.5rem;">
-                    {{ product.name }}
-                </h5>
-                <h2>${{ product.price }} COP</h2>
-                <div class="action-buttons mt-3">
-                    <div class="quantity-buttons">
-                        <button type="button" class="btn decreaseQuantity" onclick="reduceQuantity()">-</button>
-                        <span id="quantity" class="btn btn-outline-primary disabled">1</span>
-                        <button type="button" class="btn increaseQuantity" onclick="increaseQuantity()">+</button>
+        <div class="row g-0">
+            <div class="col-md-4">
+                <div class="product-body">
+                    <div class="card border-0">
+                        <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded-start">
                     </div>
-                </div>
-                <div class="quantity-available">
-                    <p>Cantidad disponible: {{ product.quantity }}</p>
-                </div>
-                {% if user.is_authenticated %}
-                <div class="action-buttons mt-3">
-                  <a class="btn btn-outline-primary" href="{% url 'update-product' pk=product.id %}" role="button">
-                    <i class="fas fa-edit"></i> Modificar producto
-                  </a>
-                </div>
-                <div class="action-buttons mt-2">
-                  <a class="btn btn-outline-danger" href="{% url 'delete-product' pk=product.id %}" role="button" onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
-                    <i class="fas fa-trash-alt"></i> Eliminar producto
-                  </a>
-                </div>
-                
-                {% else %}
-                
-                <div class="action-buttons mt-3 d-grid gap-2 d-md-block">
-                  <button type="button" class="btn btn-success" onclick="addToCart()">
-                    <i class="fas fa-cart-plus"></i> Añadir al carrito
-                  </button>
-                  
-                  <button type="button" class="btn btn-primary">
-                    <i class="fas fa-bolt"></i> Comprar ahora
-                  </button>
-                
-                  {% if product.name == "Collar" %}
-                    <a href="{% url 'create-collar' %}" class="btn btn-info" role="button">
-                      <i class="fas fa-paint-brush"></i> Personalizar
-                    </a>
-                  {% endif %}
-                </div>
-                
-                {% endif %}
-              
-                {% if product.name == "Collar" %}
-                  <h2>Lista de Collares</h2>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>ID del Collar</th>
-                                <th>Nombre del Collar</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for collar in collar %}
-                            <tr>
-                                <td>{{ collar.id }}</td>
-                                <td>Collar {{ collar.id }}</td>
-                                <td>
-                                  <a href="{% url 'add-to-cart' pk=product.id %}" class="btn btn-success" role="button">
-                                    <i class="fas fa-cart-plus"></i> Añadir al carrito
-                                </a>
+                    
 
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                {% endif%}
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="product-body">
+                    <h5 class="fw-bold" style="font-size: 2rem;">
+                        {{ product.name }}
+                    </h5>
+                    <p class="product-description">{{ product.description }}</p>
+                    <h2>${{ product.price }} COP</h2>
+                    <h6>{{ product.category }}</h6>
+                    <div class="action-buttons mt-3">
+                        <div class="quantity-buttons">
+                            <button type="button" class="btn decreaseQuantity" onclick="reduceQuantity()">-</button>
+                            <span id="quantity" class="btn btn-outline-primary disabled">1</span>
+                            <button type="button" class="btn increaseQuantity" onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+                    <div class="quantity-available">
+                        <p>Cantidad disponible: {{ product.quantity }}</p>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="action-buttons mt-3">
+                      <a class="btn btn-outline-primary" href="{% url 'update-product' pk=product.id %}" role="button">
+                        <i class="fas fa-edit"></i> Modificar producto
+                      </a>
+                    </div>
+                    <div class="action-buttons mt-2">
+                      <a class="btn btn-outline-danger" href="{% url 'delete-product' pk=product.id %}" role="button" onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
+                        <i class="fas fa-trash-alt"></i> Eliminar producto
+                      </a>
+                    </div>
+                    
+                    {% else %}
+                    
+                    <div class="action-buttons mt-3 d-grid gap-2 d-md-block">
+                      <button type="button" class="btn btn-success" onclick="addToCart()">
+                        <i class="fas fa-cart-plus"></i> Añadir al carrito
+                      </button>
+                      
+                      <button type="button" class="btn btn-primary">
+                        <i class="fas fa-bolt"></i> Comprar ahora
+                      </button>
+                    
+                      {% if product.name == "Collar" %}
+                        <a href="{% url 'create-collar' %}" class="btn btn-info" role="button">
+                          <i class="fas fa-paint-brush"></i> Personalizar
+                        </a>
+                      {% endif %}
+                    </div>
+                    
+                    {% endif %}
+                  
+                    {% if product.name == "Collar" %}
+                      <h2>Lista de Collares</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID del Collar</th>
+                                    <th>Nombre del Collar</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for collar in collar %}
+                                <tr>
+                                    <td>{{ collar.id }}</td>
+                                    <td>Collar {{ collar.id }}</td>
+                                    <td>
+                                      <a href="{% url 'add-to-cart' pk=product.id %}" class="btn btn-success" role="button">
+                                        <i class="fas fa-cart-plus"></i> Añadir al carrito
+                                    </a>
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif%}
+                </div>
+                
             </div>
             
         </div>
-        
     </div>
-</div>
 
-<script>
-    var quantity = 0;
-    var availableQuantity = {{ product.quantity }};
-    var quantityElement = document.getElementById('quantity');
-  
-    function reduceQuantity() {
-        if (quantity > 1) {
-            quantity--;
-            updateQuantity();
-        }
-    }
-  
-    function increaseQuantity() {
-        if (quantity < availableQuantity) {
-            quantity++;
-            updateQuantity();
-        } else {
-            // If the quantity is greater than available, do nothing
-        }
-    }
-  
-    function updateQuantity() {
-        quantityElement.innerText = quantity;
-  
-        // Add or remove the 'exceeded' class as needed
-        if (quantity > availableQuantity) {
-            quantityElement.classList.add('exceeded');
-        } else {
-            quantityElement.classList.remove('exceeded');
-        }
-    }
-    function addToCart() {
-      var quantity = document.getElementById('quantity').innerText; 
-      var productId = '{{ product.id }}'; 
+    <script>
+        var quantity = 0;
+        var availableQuantity = {{ product.quantity }};
+        var quantityElement = document.getElementById('quantity');
       
-      window.location.href = `{% url 'add-to-cart' pk=product.id %}?quantity=` + quantity;
-  }
-</script>
-{% endblock %}
+        function reduceQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                updateQuantity();
+            }
+        }
+      
+        function increaseQuantity() {
+            if (quantity < availableQuantity) {
+                quantity++;
+                updateQuantity();
+            } else {
+                // If the quantity is greater than available, do nothing
+            }
+        }
+      
+        function updateQuantity() {
+            quantityElement.innerText = quantity;
+      
+            // Add or remove the 'exceeded' class as needed
+            if (quantity > availableQuantity) {
+                quantityElement.classList.add('exceeded');
+            } else {
+                quantityElement.classList.remove('exceeded');
+            }
+        }
+        function addToCart() {
+          var quantity = document.getElementById('quantity').innerText; 
+          var productId = '{{ product.id }}'; 
+          
+          window.location.href = `{% url 'add-to-cart' pk=product.id %}?quantity=` + quantity;
+      }
+    </script>
+
+  </body>
+</html>
+{% endblock content %}

@@ -1,9 +1,11 @@
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from . import forms,models
 from django.db.models import Q
 
+#Hecho por: Vanessa Velez Restrepo
 
 def home_view(request):
     price_filter = request.GET.get('price', None)
@@ -76,13 +78,10 @@ def create_collar_view(request):
 def search_view(request):
     query = request.GET.get('query')
     category = request.GET.get('category')
-
-    products = None  
-    
-    if category and category.strip():  
+    products = None
+    if category and category.strip():
         if category:
             products = models.Product.objects.filter(category__icontains=category)
         else:
             products = models.Product.objects.filter(name__icontains=query)
-
     return render(request, 'products/search_results.html', {'products': products, 'query': query})

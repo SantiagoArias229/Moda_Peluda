@@ -1,98 +1,102 @@
+<!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
 
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Modificar productos</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <style media="screen">
+            a:link {
+                text-decoration: none;
+            }
 
-<head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <style media="screen">
-        a:link {
-        text-decoration: none;
-        }
+            .note {
+                text-align: center;
+                height: 80px;
+                background: #0F2027;  /* fallback for old browsers */
+                background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+                background: linear-gradient(to left, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-        .note {
-        text-align: center;
-        height: 80px;
-        background: #0F2027;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to left, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                color: #fff;
+                font-weight: bold;
+                line-height: 80px;
+            }
 
-        color: #fff;
-        font-weight: bold;
-        line-height: 80px;
-        }
+            .form-content {
+                padding: 5%;
+                border: 1px solid #ced4da;
+                margin-bottom: 2%;
+            }
 
-        .form-content {
-        padding: 5%;
-        border: 1px solid #ced4da;
-        margin-bottom: 2%;
-        }
+            .form-control {
+                border-radius: 1.5rem;
+            }
 
-        .form-control {
-        border-radius: 1.5rem;
-        }
+            .btnSubmit {
+                border: none;
+                border-radius: 1.5rem;
+                padding: 1%;
+                width: 20%;
+                cursor: pointer;
+                background: #009414;
+                color: #fff;
+            }
 
-        .btnSubmit {
-        border: none;
-        border-radius: 1.5rem;
-        padding: 1%;
-        width: 20%;
-        cursor: pointer;
-        background: #009414;
-        color: #fff;
-        }
+            
 
-        
+            .menu {
+                top: 50px;
+            }
+        </style>
+    </head>
 
-        .menu {
-        top: 50px;
-        }
-    </style>
-
-
-</head>
-
-
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="container register-form">
-        <div class="form">
-            <div class="note">
-            <p>Modificar detalles del producto</p>
+    <body>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container register-form">
+            <div class="form">
+                <div class="note">
+                <p>Modificar detalles del producto</p>
+                </div>
+                <div class="form-content">
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="id_name">Nombre</label>
+                        {{ productForm.name }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_description">Descripción</label>
+                        {{ productForm.description }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_category">Categoria</label>
+                        {{ productForm.category }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_price">Precio</label>
+                        {{ productForm.price }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_quantity">Cantidad</label>
+                        {{ productForm.quantity }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_product_image">Imagen</label>
+                        {{ productForm.product_image }}
+                    </div>
+                    
+                </div>
+                </div>
+                <button type="submit" class="btnSubmit">Actualizar detalles</button>
             </div>
-            <div class="form-content">
-            <div class="row">
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="id_name">Nombre</label>
-                    {{ productForm.name }}
-                </div>
-                <div class="form-group">
-                    <label for="id_description">Descripción</label>
-                    {{ productForm.description }}
-                </div>
-                <div class="form-group">
-                    <label for="id_category">Categoria</label>
-                    {{ productForm.category }}
-                </div>
-                <div class="form-group">
-                    <label for="id_price">Precio</label>
-                    {{ productForm.price }}
-                </div>
-                <div class="form-group">
-                    <label for="id_quantity">Cantidad</label>
-                    {{ productForm.quantity }}
-                </div>
-                <div class="form-group">
-                    <label for="id_product_image">Imagen</label>
-                    {{ productForm.product_image }}
-                </div>
-                
             </div>
-            </div>
-            <button type="submit" class="btnSubmit">Actualizar detalles</button>
-        </div>
-        </div>
-    </form>
+        </form>
+    </body>
+</html>
 {% endblock content %}

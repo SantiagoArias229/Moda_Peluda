@@ -1,71 +1,81 @@
+<!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container top-margin">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <div class="product-body text-center">
-                <div class="card border-0">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear collar</title>
+    </head>
+    <body>
+        <div class="container top-margin">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="product-body text-center">
+                        <div class="card border-0">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded">
+                        </div>
+                        <form method="post" enctype="multipart/form-data" class="mt-4">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_color">Color</label>
+                                <select name="color" id="id_color" required class="form-select">
+                                    <option value="" disabled selected>Seleccionar color</option>
+                                    {% for choice in collar_form.fields.color.choices %}
+                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_material">Material</label>
+                                <select name="material" id="id_material" required class="form-select">
+                                    <option value="" disabled selected>Seleccionar material</option>
+                                    {% for choice in collar_form.fields.material.choices %}
+                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_size">Talla</label>
+                                <select name="size" id="id_size" required class="form-select">
+                                    <option value="" disabled selected>Seleccionar talla</option>
+                                    {% for choice in collar_form.fields.size.choices %}
+                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_text_color">Color de texto</label>
+                                <select name="text_color" id="id_text_color" required class="form-select">
+                                    <option value="" disabled selected>Seleccionar color de texto</option>
+                                    {% for choice in collar_form.fields.text_color.choices %}
+                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_font_type">Tipo de fuente</label>
+                                <select name="font_type" id="id_font_type" required class="form-select">
+                                    <option value="" disabled selected>Seleccionar tipo de fuente</option>
+                                    {% for choice in collar_form.fields.font_type.choices %}
+                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_design">Diseño</label>
+                                <textarea name="design" id="id_design" required class="form-control"></textarea>
+                            </div>
+                            <div class="button-container mt-3">
+                                <button type="submit" class="btn btn-primary" style="background-color:#dcc79a; color: #000; border-radius: 25px; border: none; padding: 10px 20px;">Guardar selección</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <form method="post" enctype="multipart/form-data" class="mt-4">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="id_color">Color</label>
-                        <select name="color" id="id_color" required class="form-select">
-                            <option value="" disabled selected>Seleccionar color</option>
-                            {% for choice in collar_form.fields.color.choices %}
-                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_material">Material</label>
-                        <select name="material" id="id_material" required class="form-select">
-                            <option value="" disabled selected>Seleccionar material</option>
-                            {% for choice in collar_form.fields.material.choices %}
-                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_size">Talla</label>
-                        <select name="size" id="id_size" required class="form-select">
-                            <option value="" disabled selected>Seleccionar talla</option>
-                            {% for choice in collar_form.fields.size.choices %}
-                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_text_color">Color de texto</label>
-                        <select name="text_color" id="id_text_color" required class="form-select">
-                            <option value="" disabled selected>Seleccionar color de texto</option>
-                            {% for choice in collar_form.fields.text_color.choices %}
-                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_font_type">Tipo de fuente</label>
-                        <select name="font_type" id="id_font_type" required class="form-select">
-                            <option value="" disabled selected>Seleccionar tipo de fuente</option>
-                            {% for choice in collar_form.fields.font_type.choices %}
-                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_design">Diseño</label>
-                        <textarea name="design" id="id_design" required class="form-control"></textarea>
-                    </div>
-                    <div class="button-container mt-3">
-                        <button type="submit" class="btn btn-primary" style="background-color:#dcc79a; color: #000; border-radius: 25px; border: none; padding: 10px 20px;">Guardar selección</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
-</div>
+    </body>
+</html>
 {% endblock content %}

@@ -1,235 +1,239 @@
+<!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style media="screen">
+        body, html {
+          height: 100%;
+          margin: 0;
+          font-family: 'Montserrat', sans-serif;
+          font-t
+          background-color: #f7f7f7;
+        }
 
-<style media="screen">
-  body, html {
-    height: 100%;
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    font-t
-    background-color: #f7f7f7;
-  }
+        .page-wrapper {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
 
-  .page-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+        .item-wrapper {
+          position: relative;
+          width: 360px;
+          margin: 15px;
+          background-color: #fff;
+          border-radius: 15px;
+          overflow: hidden;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s;
+        }
 
-  .item-wrapper {
-    position: relative;
-    width: 360px;
-    margin: 15px;
-    background-color: #fff;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-  }
+        .item-wrapper:hover {
+          transform: scale(1.05);
+        }
 
-  .item-wrapper:hover {
-    transform: scale(1.05);
-  }
+        .item-image {
+          overflow: hidden;
+          position: relative;
+        }
 
-  .item-image {
-    overflow: hidden;
-    position: relative;
-  }
+        .item-image img {
+          width: 100%;
+          height: 200px; 
+          object-fit: contain; 
+          transition: transform 0.3s;
+        }
 
-  .item-image img {
-    width: 100%;
-    height: 200px; 
-    object-fit: contain; 
-    transition: transform 0.3s;
-  }
+        .btn-learn-more {
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 8px 15px;
+          background-color: #d8a58a;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
 
-  .btn-learn-more {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 8px 15px;
-    background-color: #d8a58a;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
+        .item-image:hover .btn-learn-more {
+          opacity: 1;
+        }
 
-  .item-image:hover .btn-learn-more {
-    opacity: 1;
-  }
+        .item-info {
+          text-align: center;
+          padding: 10px;
+        }
 
-  .item-info {
-    text-align: center;
-    padding: 10px;
-  }
+        .item-info h4,
+        .item-price {
+          margin: 0;
+          font-size: 1.8rem;
+          color: #2b2b2b;
+        }
 
-  .item-info h4,
-  .item-price {
-    margin: 0;
-    font-size: 1.8rem;
-    color: #2b2b2b;
-  }
+        .item-info h4 {
+          text-transform: uppercase;
+          font-family: 'Montserrat', sans-serif; 
+          font-weight: bold; 
+        }
 
-  .item-info h4 {
-    text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif; 
-    font-weight: bold; 
-  }
+        .item-price {
+          font-weight: bold;
+          margin-top: 5px;
+        }
 
-  .item-price {
-    font-weight: bold;
-    margin-top: 5px;
-  }
-
-  .slider-container{
-    height: 35%;
-    width: 100%;
-    position: relative;
-    overflow: hidden; 
-    text-align: center;
-  }
-  
-  .slide {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 100%;
-    z-index: 10;
-    padding: 8em 1em 0;
-    background-size: contain;
-    background-position: 50% 50%;
-    transition: left 0s .75s;
-  }
-  
-  [id^="slide"]:checked + .slide {
-    left: 0;
-    z-index: 100;
-    transition: left .65s ease-out;
-  }
-  
-  input[type="radio"] {
-    display: none;
-  }
-  
-  .slide-1 {
-    background-image: url("{% static 'images/example2.jpg' %}");
-  }
-  .slide-2 {
-    background-image: url("{% static 'images/example.jpg' %}");
-  }
-  .slide-3 {
-    background-image: url("{% static 'images/example3.jpg' %}");
-  }
-
-
-  .menu {
-    position: absolute;
-    left: 0;
-    z-index: 900;
-    width: 100%;
-    bottom: 0;
-  }
-  
-  .menu label {
-    cursor: pointer;
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background: #fff;
-    border-radius: 50px;
-    margin: 0 .2em 1em;
-    &:hover {
-      background: red;
-    }
-  }
-  
-  .filter-options {
-    position: sticky;
-    top: 20px;
-  }
-  
-  .list-group-item a {
-    display: block;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .list-group-item a:hover {
-    text-decoration: underline;
-  }
-  
-  .page-wrapper {
-    /* Tus estilos actuales para .page-wrapper */
-  }
-  
-  
-
-</style>
-
-
-<div class="row">
-  <div class="col-md-12">
-    <div class="slider-container">
-      <div class="menu">
-        <label for="slide-dot-1"></label>
-        <label for="slide-dot-2"></label>
-        <label for="slide-dot-3"></label>
-
-      </div>
-      
-      <input id="slide-dot-1" type="radio" name="slides" checked>
-        <div class="slide slide-1"></div>
-      
-      <input id="slide-dot-2" type="radio" name="slides" >
-        <div class="slide slide-2"></div>
-      
-      <input id="slide-dot-3" type="radio" name="slides" >
-        <div class="slide slide-3"></div>
+        .slider-container{
+          height: 35%;
+          width: 100%;
+          position: relative;
+          overflow: hidden; 
+          text-align: center;
+        }
         
-    </div>
-  </div>
-</div>
+        .slide {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 100%;
+          z-index: 10;
+          padding: 8em 1em 0;
+          background-size: contain;
+          background-position: 50% 50%;
+          transition: left 0s .75s;
+        }
+        
+        [id^="slide"]:checked + .slide {
+          left: 0;
+          z-index: 100;
+          transition: left .65s ease-out;
+        }
+        
+        input[type="radio"] {
+          display: none;
+        }
+        
+        .slide-1 {
+          background-image: url("{% static 'images/example2.jpg' %}");
+        }
+        .slide-2 {
+          background-image: url("{% static 'images/example.jpg' %}");
+        }
+        .slide-3 {
+          background-image: url("{% static 'images/example3.jpg' %}");
+        }
 
-<div class="row">
-  <div class="col-md-3">
-    <div class="filter-options">
-      <h3>Precio</h3>
-      <ul class="list-group">
-        <li class="list-group-item"><a href="?price=menos10">Menos de 10.000</a></li>
-        <li class="list-group-item"><a href="?price=10a50">10.000 - 50.000</a></li>
-        <li class="list-group-item"><a href="?price=50a80">50.000 - 80.000</a></li>
-        <li class="list-group-item"><a href="?price=80a100">80.000 - 100.000</a></li>
-        <li class="list-group-item"><a href="?price=mas100">Más de 100.000</a></li>
-        <li class="list-group-item"><a href="{{ request.path }}">Limpiar Filtros</a></li>
-      </ul>
-    </div>
-  </div>
 
-<div class="page-wrapper">
-  {% if products %}
-    {% for p in products %}
-      <div class="item-wrapper">
-        <div class="item-image">
-          <img src="{% static p.product_image.url %}" alt="product pic">
-          
-          <button class="btn-learn-more" onclick="window.location.href='{% url 'detail' pk=p.id %}'">Ver detalles</button>          
-        </div>
-        <div class="item-info">
-          <h4>{{ p.name }}</h4>
-          <p>{{ p.description }}</p>
-          <div class="item-price">
-            ${{ p.price }} COP
+        .menu {
+          position: absolute;
+          left: 0;
+          z-index: 900;
+          width: 100%;
+          bottom: 0;
+        }
+        
+        .menu label {
+          cursor: pointer;
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          background: #fff;
+          border-radius: 50px;
+          margin: 0 .2em 1em;
+          &:hover {
+            background: red;
+          }
+        }
+        
+        .filter-options {
+          position: sticky;
+          top: 20px;
+        }
+        
+        .list-group-item a {
+          display: block;
+          text-decoration: none;
+          color: #333;
+        }
+        
+        .list-group-item a:hover {
+          text-decoration: underline;
+        }
+        
+        .page-wrapper {
+          /* Tus estilos actuales para .page-wrapper */
+        }
+        
+        
+
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="slider-container">
+          <div class="menu">
+            <label for="slide-dot-1"></label>
+            <label for="slide-dot-2"></label>
+            <label for="slide-dot-3"></label>
+
           </div>
+          
+          <input id="slide-dot-1" type="radio" name="slides" checked>
+            <div class="slide slide-1"></div>
+          
+          <input id="slide-dot-2" type="radio" name="slides" >
+            <div class="slide slide-2"></div>
+          
+          <input id="slide-dot-3" type="radio" name="slides" >
+            <div class="slide slide-3"></div>
+            
         </div>
       </div>
-    {% endfor %}
-  {% endif %}
-</div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-3">
+        <div class="filter-options">
+          <h3>Precio</h3>
+          <ul class="list-group">
+            <li class="list-group-item"><a href="?price=menos10">Menos de 10.000</a></li>
+            <li class="list-group-item"><a href="?price=10a50">10.000 - 50.000</a></li>
+            <li class="list-group-item"><a href="?price=50a80">50.000 - 80.000</a></li>
+            <li class="list-group-item"><a href="?price=80a100">80.000 - 100.000</a></li>
+            <li class="list-group-item"><a href="?price=mas100">Más de 100.000</a></li>
+            <li class="list-group-item"><a href="{{ request.path }}">Limpiar Filtros</a></li>
+          </ul>
+        </div>
+      </div>
+
+    <div class="page-wrapper">
+      {% if products %}
+        {% for p in products %}
+          <div class="item-wrapper">
+            <div class="item-image">
+              <img src="{% static p.product_image.url %}" alt="product pic">
+              
+              <button class="btn-learn-more" onclick="window.location.href='{% url 'detail' pk=p.id %}'">Ver detalles</button>          
+            </div>
+            <div class="item-info">
+              <h4>{{ p.name }}</h4>
+              <p>{{ p.description }}</p>
+              <div class="item-price">
+                ${{ p.price }} COP
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </body>
+</html>
 {% endblock content %}
