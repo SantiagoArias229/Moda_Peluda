@@ -9,19 +9,15 @@
     }
 
     .action-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 15px;
-    }
+  display: flex;
+  justify-content: start; /* Alinea los elementos al inicio del contenedor */
+  align-items: center; /* Alinea los elementos verticalmente en el centro */
+  gap: 10px; /* Espacio entre los elementos */
+  } 
 
-    .action-buttons button {
-      width: calc(50% - 10px); 
-      border: none;
-      border-radius: 25px;
-      padding: 15px 0; 
-      font-size: 18px;
-      box-sizing: border-box; 
-    }
+  .action-buttons .button {
+  flex: 0 1 auto; /* Permite que los botones tengan su tamaño contenido pero también puedan crecer si es necesario, sin ocupar todo el espacio disponible */
+}
 
     .action-buttons .quantity-buttons {
       display: flex;
@@ -103,9 +99,7 @@
 
 <div class="top-margin"></div>
 <div class="card mb-3">
-  {% if product.name == "Collar" %}
-    <a type="button" class="btn personalize" href="{% url 'create-collar' %}">Personalizar</a>
-  {% endif%}
+  
     <div class="row g-0">
         <div class="col-md-4">
             <div class="product-body">
@@ -144,10 +138,12 @@
                 
                 <div class="action-buttons mt-3">
                   <button type="button" class="btn addToCart" onclick="addToCart()">Añadir al carrito</button>
+                  
+                  <button type="button" class="btn buyNow">Comprar ahora</button>
+                {% if product.name == "Collar" %}
+                    <a type="button" class="btn personalize" href="{% url 'create-collar' %}">Personalizar</a>
+                  {% endif %}
                 </div>
-                  <div class="action-buttons">
-                      <button type="button" class="btn buyNow" >Comprar ahora</button>
-                  </div>
                 {% endif %}
                 {% if product.name == "Collar" %}
                   <h2>Lista de Collares</h2>
