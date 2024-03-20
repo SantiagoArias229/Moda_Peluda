@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ventas por Mes</title>
+    <title>Ventas por Mes y Detalle de Órdenes</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -12,13 +12,11 @@
         <canvas id="salesChart"></canvas>
     </div>
     <script>
-        // Parsea los datos de los meses y totales desde el contexto de Django
         var months = JSON.parse('{{ months|safe }}');
         var totals = JSON.parse('{{ totals|safe }}');
-
         var ctx = document.getElementById('salesChart').getContext('2d');
         var salesChart = new Chart(ctx, {
-            type: 'line', // Puedes cambiar esto a 'bar' si prefieres un gráfico de barras
+            type: 'line',
             data: {
                 labels: months,
                 datasets: [{
@@ -40,7 +38,33 @@
             }
         });
     </script>
+
+    <!-- Agregar una tabla para mostrar el detalle de las órdenes -->
+    <h2>Detalle de Órdenes</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre del Cliente</th>
+                <th>Tipo de Pago</th>
+                <th>Dirección</th>
+                <th>Correo Electrónico</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.customer_name }}</td>
+                <td>{{ order.payment_type }}</td>
+                <td>{{ order.address }}</td>
+                <td>{{ order.email }}</td>
+                <td>{{ order.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
-
 {% endblock %}

@@ -10,6 +10,11 @@ from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.db.models import Count
 from django.shortcuts import render
+from django.shortcuts import render
+from django.core.serializers import serialize
+from .models import Order
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 def create_order(request):
@@ -76,19 +81,19 @@ def order_confirmation(request, order_id):
     return response
 
 def view_stadistics(request):
-
-
     orders_per_month = Order.objects.annotate(month=TruncMonth('date')).values('month').annotate(total=Count('id')).order_by('month')
-
     months = [order['month'].strftime("%Y-%m") for order in orders_per_month]
     totals = [order['total'] for order in orders_per_month]
 
-    months_json = json.dumps(months, cls=DjangoJSONEncoder)
-    totals_json = json.dumps(totals, cls=DjangoJSONEncoder)
+    all_orders = Order.objects.all().values('id', 'customer_name', 'payment_type', 'address', 'email', 'date')
+
+    for order in all_orders:
+        order['date'] = order['date'].strftime("%Y-%m-%d %H:%M:%S")
 
     context = {
-        'months': months_json,
-        'totals': totals_json,
+        'months': json.dumps(months, cls=DjangoJSONEncoder),
+        'totals': json.dumps(totals, cls=DjangoJSONEncoder),
+        'orders': all_orders,  
     }
 
-    return render(request, 'orders\order_stadistics.html', context)
+    return render(request, 'orders/order_stadistics.html', context)
