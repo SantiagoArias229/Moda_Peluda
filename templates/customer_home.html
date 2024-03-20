@@ -1,5 +1,6 @@
 <!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
+
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -16,13 +17,24 @@
 
         .page-wrapper {
           display: flex;
+          justify-content: center;
+        }
+
+        .sidebar {
+          width: 20%; /* Ajusta el ancho según sea necesario */
+          max-height: 600px; /* Por ejemplo, ajusta según sea necesario */
+          overflow-y: auto;
+        }
+
+        .content-wrapper {
+          flex: 1;
+          display: flex;
           flex-wrap: wrap;
           justify-content: center;
         }
 
         .item-wrapper {
-          position: relative;
-          width: 360px;
+          width: 300px;
           margin: 15px;
           background-color: #fff;
           border-radius: 15px;
@@ -42,7 +54,7 @@
 
         .item-image img {
           width: 100%;
-          height: 200px; 
+          height: 200px; /* Ajusta la altura según sea necesario */
           object-fit: contain; 
           transition: transform 0.3s;
         }
@@ -89,6 +101,21 @@
           margin-top: 5px;
         }
 
+        .filter-options {
+          position: sticky;
+          top: 20px;
+        }
+        
+        .list-group-item a {
+          display: block;
+          text-decoration: none;
+          color: #333;
+        }
+        
+        .list-group-item a:hover {
+          text-decoration: underline;
+        }
+
         .slider-container{
           height: 35%;
           width: 100%;
@@ -130,109 +157,43 @@
           background-image: url("{% static 'images/example3.jpg' %}");
         }
 
-
-        .menu {
-          position: absolute;
-          left: 0;
-          z-index: 900;
-          width: 100%;
-          bottom: 0;
-        }
-        
-        .menu label {
-          cursor: pointer;
-          display: inline-block;
-          width: 16px;
-          height: 16px;
-          background: #fff;
-          border-radius: 50px;
-          margin: 0 .2em 1em;
-          &:hover {
-            background: red;
-          }
-        }
-        
-        .filter-options {
-          position: sticky;
-          top: 20px;
-        }
-        
-        .list-group-item a {
-          display: block;
-          text-decoration: none;
-          color: #333;
-        }
-        
-        .list-group-item a:hover {
-          text-decoration: underline;
-        }
-        
-        .page-wrapper {
-          /* Tus estilos actuales para .page-wrapper */
-        }
-        
-        
-
     </style>
   </head>
   <body>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="slider-container">
-          <div class="menu">
-            <label for="slide-dot-1"></label>
-            <label for="slide-dot-2"></label>
-            <label for="slide-dot-3"></label>
-
-          </div>
-          
-          <input id="slide-dot-1" type="radio" name="slides" checked>
-            <div class="slide slide-1"></div>
-          
-          <input id="slide-dot-2" type="radio" name="slides" >
-            <div class="slide slide-2"></div>
-          
-          <input id="slide-dot-3" type="radio" name="slides" >
-            <div class="slide slide-3"></div>
-            
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3">
+    <div class="page-wrapper">
+      <div class="sidebar">
         <div class="filter-options">
           <h3>Precio</h3>
           <ul class="list-group">
-            <li class="list-group-item"><a href="?price=menos10">Menos de 10.000</a></li>
-            <li class="list-group-item"><a href="?price=10a50">10.000 - 50.000</a></li>
-            <li class="list-group-item"><a href="?price=50a80">50.000 - 80.000</a></li>
-            <li class="list-group-item"><a href="?price=80a100">80.000 - 100.000</a></li>
-            <li class="list-group-item"><a href="?price=mas100">Más de 100.000</a></li>
-            <li class="list-group-item"><a href="{{ request.path }}">Limpiar Filtros</a></li>
+            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=menos10">Menos de 10.000</a></li>
+            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=10a50">10.000 - 50.000</a></li>
+            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=50a80">50.000 - 80.000</a></li>
+            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=80a100">80.000 - 100.000</a></li>
+            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=mas100">Más de 100.000</a></li>
+            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="{{ request.path }}">Limpiar Filtros</a></li>
           </ul>
         </div>
       </div>
 
-    <div class="page-wrapper">
-      {% if products %}
-        {% for p in products %}
-          <div class="item-wrapper">
-            <div class="item-image">
-              <img src="{% static p.product_image.url %}" alt="product pic">
-              
-              <button class="btn-learn-more" onclick="window.location.href='{% url 'detail' pk=p.id %}'">Ver detalles</button>          
-            </div>
-            <div class="item-info">
-              <h4>{{ p.name }}</h4>
-              <p>{{ p.description }}</p>
-              <div class="item-price">
-                ${{ p.price }} COP
+      <div class="content-wrapper">
+        {% if products %}
+          {% for p in products %}
+            <div class="item-wrapper">
+              <div class="item-image">
+                <img src="{% static p.product_image.url %}" alt="product pic">
+                <button class="btn-learn-more" onclick="window.location.href='{% url 'detail' pk=p.id %}'">Ver detalles</button>          
+              </div>
+              <div class="item-info">
+                <h4>{{ p.name }}</h4>
+                <p>{{ p.description }}</p>
+                <div class="item-price">
+                  ${{ p.price }} COP
+                </div>
               </div>
             </div>
-          </div>
-        {% endfor %}
-      {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
     </div>
   </body>
 </html>

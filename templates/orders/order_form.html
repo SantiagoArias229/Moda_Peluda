@@ -3,117 +3,72 @@
 {% block content %}
 
 <style>
-
-    .top-margin {
-      margin-top: 70px;
+    body {
+        padding-top: 70px; /* Ajusta según la altura de tu navbar si tienes uno */
     }
-
-    .action-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 15px;
+    .container {
+        max-width: 800px; /* Ajusta este valor según prefieras */
     }
-
-    .action-buttons button {
-      width: calc(50% - 10px); 
-      border: none;
-      border-radius: 25px;
-      padding: 15px 0; 
-      font-size: 18px;
-      box-sizing: border-box; 
+    .btn-custom {
+        border: none;
+        border-radius: 25px;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: background-color 0.2s ease-in-out;
     }
-
-    .action-buttons .quantity-buttons {
-      display: flex;
-      align-items: center;
+    .btn-primary-custom {
+        background-color: #007bff;
+        color: #fff;
     }
-
-    .action-buttons #quantity {
-      color: #555;
-      padding: 12px;
-      border-radius: 5px;
-      margin: 0 10px; 
+    .btn-primary-custom:hover {
+        background-color: #0056b3;
     }
-
-    .action-buttons button.increaseQuantity,
-    .action-buttons button.decreaseQuantity {
-      background-color: #d8a48a;
-      color: #555;
-      padding: 6px 12px;
-      border-radius: 5px;
+    .form-group {
+        margin-bottom: 1rem;
     }
-
-    .action-buttons button.addToCart {
-      background-color: #d4d3d1;
-      color: #555;
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
-
-    .action-buttons button.addToCart:hover {
-      background-color: #cda09b;
-      color: #000;
+    .form-control:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
     }
-
-    .action-buttons button.buyNow {
-      background-color: #cda09b;
-      color: #000;
+    .btn-submit {
+        font-size: 18px;
+        padding: 10px 24px;
+        border-radius: 30px; /* Botón más redondeado */
+        color: #fff; /* Texto blanco */
+        background-color: #007bff; /* Azul de Bootstrap */
+        border-color: #007bff;
     }
-
-    .product-body {
-      margin-left: 100px;
-      
+    .btn-submit:hover {
+        background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+        border-color: #0056b3;
     }
-
-    .product-body img {
-      width: 300px;
-      height: 300px;
-      border-radius: 10px;
-    }
-
-    .product-body h5 {
-      font-family: 'Montserrat', sans-serif;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-
-    .product-body h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.9rem;
-      font-weight: bold;
-      margin-bottom: 60px;
-    }
-
-    .product-description {
-      text-align: center;
-      font-size: 1.7rem;
-      color: #000;
-    }
-
-    .personalize {
-      border-radius: 25px;
-      padding: 15px 25px;
-      background-color: #cda09b;
-      color: #000;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
 </style>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Orden</title>
-</head>
-<body>
-    <h1>Crear una nueva orden</h1>
-    <form method="post">
+
+<div class="container">
+    <h1 class="mb-4">Crear una nueva orden</h1>
+    <form method="post" class="needs-validation" novalidate>
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enviar Orden</button>
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button style="background-color: #dcc79a;" type="submit" class="btn btn-primary-custom">Enviar Orden</button>
     </form>
-</body>
-</html>
+</div>
+
 {% endblock %}

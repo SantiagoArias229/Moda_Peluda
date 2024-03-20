@@ -50,12 +50,15 @@
             <div class="d-flex justify-content-between align-items-center mt-3">
                 <h5>Total: ${{ total }}</h5>
                 <div>
+                    {% if total != 0 %}
                     <a href="/checkout" class="btn btn-primary">Comprar</a>
                     <a href="" onclick="borrarCookies()" class="btn btn-lg">
                         <button class="btn btn-primary">
                             <span>Vaciar Carrito </span>
                         </button>
                     </a>
+                    {% endif %}
+
                     <a href="{% url '' %}" class="btn btn-primary">Seguir comprando</a>
                 </div>
             </div>

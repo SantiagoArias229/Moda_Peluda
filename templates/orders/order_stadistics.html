@@ -39,10 +39,11 @@
         });
     </script>
 
-    <!-- Agregar una tabla para mostrar el detalle de las órdenes -->
+    
     <h2>Detalle de Órdenes</h2>
-    <table border="1">
-        <thead>
+<div class="table-responsive"> 
+    <table class="table table-bordered table-hover shadow-sm"> 
+        <thead class="table-light"> 
             <tr>
                 <th>ID</th>
                 <th>Nombre del Cliente</th>
@@ -65,6 +66,8 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
+
 </body>
 </html>
 {% endblock %}
