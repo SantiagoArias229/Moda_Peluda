@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from . import forms,models
 from django.db.models import Q
+from django.http import JsonResponse
+from django.utils.translation import gettext as _
 
 #Hecho por: Vanessa Velez Restrepo
 
@@ -18,7 +20,7 @@ def home_view(request):
     }
     query = queries.get(price_filter, Q())
     products = models.Product.objects.filter(query)
-    
+
     return render(request, 'customer_home.html', {'products': products})
 
 
@@ -85,3 +87,18 @@ def search_view(request):
         else:
             products = models.Product.objects.filter(name__icontains=query)
     return render(request, 'products/search_results.html', {'products': products, 'query': query})
+
+
+### API para obtener los collares que han creado los clientes ###
+def get_personalized_collar_view(request):
+    collares = models.Collar.objects.all()
+    collares_json = [{
+        'id': collar.id,
+        'material': collar.material,
+        'color': collar.color,
+        'size': collar.size,
+        'text_color': collar.text_color,
+        'font_type': collar.font_type,
+        'design': collar.design,
+    } for collar in collares]
+    return JsonResponse({'collares_personalizados': collares_json})

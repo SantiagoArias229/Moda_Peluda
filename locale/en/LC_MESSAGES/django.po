@@ -1,0 +1,270 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-19 11:40-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\templates\accounts\loginAccount.html:19
+msgid "Ingreso administrador"
+msgstr "Login admin"
+
+#: .\templates\accounts\loginAccount.html:36 .\templates\base.html:70
+msgid "Iniciar sesión"
+msgstr "Login"
+
+#: .\templates\accounts\signupAccount.html:19
+msgid "Registro administrador"
+msgstr "Register admin"
+
+#: .\templates\accounts\signupAccount.html:39
+msgid "Registrarse"
+msgstr "Register"
+
+#: .\templates\base.html:57
+msgid "Cerrar sesión "
+msgstr "Logout"
+
+#: .\templates\base.html:60
+msgid "Crear administrador"
+msgstr "Create admin"
+
+#: .\templates\base.html:63
+msgid "Ver estadisticas"
+msgstr "Show statistics"
+
+#: .\templates\base.html:66
+msgid "Crear producto"
+msgstr "Create product"
+
+#: .\templates\base.html:73
+msgid "Carrito"
+msgstr "Cart"
+
+#: .\templates\base.html:78
+msgid "Buscar por categoría"
+msgstr "Search by category"
+
+#: .\templates\cart\cart.html:17
+msgid "Mi carrito"
+msgstr "Cart"
+
+#: .\templates\cart\cart.html:23
+msgid "Producto"
+msgstr "Product"
+
+#: .\templates\cart\cart.html:24 .\templates\products\create_product.html:89
+#: .\templates\products\update_product.html:86
+msgid "Cantidad"
+msgstr "Quantity"
+
+#: .\templates\cart\cart.html:25 .\templates\customer_home.html:166
+#: .\templates\products\create_product.html:78
+#: .\templates\products\update_product.html:82
+msgid "Precio"
+msgstr "Price"
+
+#: .\templates\cart\cart.html:26 .\templates\products\create_product.html:74
+#: .\templates\products\update_product.html:74
+msgid "Descripción"
+msgstr "Description"
+
+#: .\templates\cart\cart.html:27
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#: .\templates\cart\cart.html:28
+msgid "Acción"
+msgstr "Action"
+
+#: .\templates\cart\cart.html:39
+msgid "Eliminar"
+msgstr "Delete"
+
+#: .\templates\cart\cart.html:43
+msgid "No hay productos en el carrito"
+msgstr "The cart is empty"
+
+#: .\templates\cart\cart.html:54
+msgid "Comprar"
+msgstr "Buy"
+
+#: .\templates\cart\cart.html:57
+msgid "Vaciar carrito"
+msgstr "Empty cart"
+
+#: .\templates\cart\cart.html:62 .\templates\cart\cart_success.html:11
+msgid "Seguir comprando"
+msgstr "Keep looking"
+
+#: .\templates\cart\cart_success.html:8
+msgid "Producto añadido exitosamente"
+msgstr "Product added successfully"
+
+#: .\templates\cart\cart_success.html:12
+msgid "Ir al carrito"
+msgstr "Go to cart"
+
+#: .\templates\customer_home.html:168
+msgid "Menos de "
+msgstr "Less than "
+
+#: .\templates\customer_home.html:172
+msgid "Más de "
+msgstr "More than "
+
+#: .\templates\customer_home.html:173
+msgid "Limpiar filtros"
+msgstr "Clean filter"
+
+#: .\templates\customer_home.html:184
+msgid "Ver más"
+msgstr "Show more"
+
+#: .\templates\products\create_collar.html:10
+#, fuzzy
+#| msgid "Crear producto"
+msgid "Crear collar"
+msgstr "Create product"
+
+#: .\templates\products\create_collar.html:26
+msgid "Seleccionar color"
+msgstr "Select color"
+
+#: .\templates\products\create_collar.html:35
+msgid "Seleccionar material"
+msgstr "Select material"
+
+#: .\templates\products\create_collar.html:42
+msgid "Talla"
+msgstr "Size"
+
+#: .\templates\products\create_collar.html:44
+msgid "Seleccionar talla"
+msgstr "Select size"
+
+#: .\templates\products\create_collar.html:51
+msgid "Color de texto"
+msgstr "Text color"
+
+#: .\templates\products\create_collar.html:53
+msgid "Seleccionar color de texto"
+msgstr "Select text color"
+
+#: .\templates\products\create_collar.html:60
+msgid "Tipo de fuente"
+msgstr "Font type"
+
+#: .\templates\products\create_collar.html:62
+msgid "Seleccionar tipo de fuente"
+msgstr "Select font type"
+
+#: .\templates\products\create_collar.html:69
+msgid "Diseño"
+msgstr "Design"
+
+#: .\templates\products\create_collar.html:73
+msgid "Guardar selección"
+msgstr "Save"
+
+#: .\templates\products\create_product.html:64
+msgid "Añadir productos"
+msgstr "Add products"
+
+#: .\templates\products\create_product.html:70
+msgid "Nombre del producto"
+msgstr "Product name"
+
+#: .\templates\products\create_product.html:85
+msgid "Categoria"
+msgstr "Category"
+
+#: .\templates\products\create_product.html:93
+#: .\templates\products\update_product.html:90
+msgid "Imagen"
+msgstr "Image"
+
+#: .\templates\products\create_product.html:98
+msgid "AÑADIR"
+msgstr "ADD"
+
+#: .\templates\products\detail.html:135
+msgid "Cantidad disponible"
+msgstr "Quantity available"
+
+#: .\templates\products\detail.html:140
+msgid "Modificar producto"
+msgstr "Modify product"
+
+#: .\templates\products\detail.html:145
+msgid "Eliminar producto"
+msgstr "Delete product"
+
+#: .\templates\products\detail.html:153 .\templates\products\detail.html:186
+msgid "Añadir al carrito"
+msgstr "Add to cart"
+
+#: .\templates\products\detail.html:157
+msgid "Comprar ahora"
+msgstr "Buy now"
+
+#: .\templates\products\detail.html:162
+msgid "Personalizar"
+msgstr "Personalize"
+
+#: .\templates\products\detail.html:170
+msgid "Lista de collares"
+msgstr "Collar list"
+
+#: .\templates\products\detail.html:174
+msgid "ID del collar"
+msgstr "Collar ID"
+
+#: .\templates\products\detail.html:175
+msgid "Nombre del collar"
+msgstr "Collar name"
+
+#: .\templates\products\detail.html:176
+msgid "Añadir"
+msgstr "Add"
+
+#: .\templates\products\search_results.html:99
+msgid "Ver detalles"
+msgstr "See details"
+
+#: .\templates\products\update_product.html:64
+msgid "Modificar detalles del producto"
+msgstr "Modify product details"
+
+#: .\templates\products\update_product.html:70
+msgid "Nombre"
+msgstr "Name"
+
+#: .\templates\products\update_product.html:78
+msgid "Categoría"
+msgstr "Category"
+
+#: .\templates\products\update_product.html:96
+msgid "Actualizar detalles"
+msgstr "Update details"
+
+#, fuzzy
+#~| msgid "Iniciar sesión"
+#~ msgid "Iniciar sesión "
+#~ msgstr "Login"
+
+#~ msgid "Ver mas opciones"
+#~ msgstr "More options"

@@ -1,11 +1,13 @@
+
 <!DOCTYPE html>
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>E-commerce</title>
+    <title>Moda Peluda</title>
 </head>
 <body>
     <div class="container mt-5">
@@ -14,7 +16,7 @@
                 <div class="card shadow-lg">
                     <div class="card-body">
                         <form class="form-signin" method="post">
-                            <h1 class="h3 mb-3 font-weight-normal card-title text-center">Ingreso Administrador</h1>
+                            <h1 class="h3 mb-3 font-weight-normal card-title text-center">{% translate "Ingreso administrador" %}</h1>
                             {% if error %}
                             <div class="alert alert-danger" role="alert">
                                 {{ error }}
@@ -31,7 +33,7 @@
                                 {{ form.password }}
                             </div>
                             
-                            <button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #dcc79a; #color: #000; border: none;">Login</button>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #dcc79a; #color: #000; border: none;">{% translate "Iniciar sesión" %}</button>
                             
                         </form>
                     </div>

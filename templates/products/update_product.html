@@ -1,6 +1,6 @@
 <!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -61,39 +61,39 @@
             <div class="container register-form">
             <div class="form">
                 <div class="note">
-                <p>Modificar detalles del producto</p>
+                <p>{% translate "Modificar detalles del producto" %}</p>
                 </div>
                 <div class="form-content">
                 <div class="row">
                     <div class="col-md-6">
                     <div class="form-group">
-                        <label for="id_name">Nombre</label>
+                        <label for="id_name">{% translate "Nombre" %}</label>
                         {{ productForm.name }}
                     </div>
                     <div class="form-group">
-                        <label for="id_description">Descripción</label>
+                        <label for="id_description">{% translate "Descripción" %}</label>
                         {{ productForm.description }}
                     </div>
                     <div class="form-group">
-                        <label for="id_category">Categoria</label>
+                        <label for="id_category">{% translate "Categoría" %}</label>
                         {{ productForm.category }}
                     </div>
                     <div class="form-group">
-                        <label for="id_price">Precio</label>
+                        <label for="id_price">{% translate "Precio" %}</label>
                         {{ productForm.price }}
                     </div>
                     <div class="form-group">
-                        <label for="id_quantity">Cantidad</label>
+                        <label for="id_quantity">{% translate "Cantidad" %}</label>
                         {{ productForm.quantity }}
                     </div>
                     <div class="form-group">
-                        <label for="id_product_image">Imagen</label>
+                        <label for="id_product_image">{% translate "Imagen" %}</label>
                         {{ productForm.product_image }}
                     </div>
                     
                 </div>
                 </div>
-                <button type="submit" class="btnSubmit">Actualizar detalles</button>
+                <button type="submit" class="btnSubmit">{% translate "Actualizar detalles" %}</button>
             </div>
             </div>
         </form>

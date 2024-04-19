@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-yrw0z(9!65e4m3lyht%@w#@dtrfkssje^!_#=8_#i8j#decifg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.184.53.137']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -49,11 +49,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'Moda_Peluda.urls'
@@ -110,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -118,7 +120,14 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('es', 'Español'),
+]
 
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -133,3 +142,8 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'loginAccount'
+
+PAYPAL_CLIENT_ID = 'AST58LIhYV2OoZUk5ro4mmi2mfP5CEo7mArmRNX-ExgUN-ifV1daG13hW14Vq4_yXqcKPllIvfOh0ro4'
+PAYPAL_CLIENT_SECRET = 'EK-vKAh6NUJI8pZKj1EFEMIjQe7pSXt11F_Os99w7z5f2PxOr6OI35Jmk7Q_IC2DXWeYqLZN1-jKZn8j'
+
+

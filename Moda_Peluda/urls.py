@@ -44,4 +44,9 @@ urlpatterns = [
     path('checkout/statistics', orderViews.view_stadistics,name='stadistics'),
 
     path('search', productViews.search_view, name='search'),
+    path('payment/', orderViews.payment_view, name='payment'),
+    
+    
+    # API #
+    path('api/collares-creados/', productViews.get_personalized_collar_view, name='api_collares_stock'),
 ]

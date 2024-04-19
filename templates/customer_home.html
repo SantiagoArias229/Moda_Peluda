@@ -1,6 +1,6 @@
 <!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -163,14 +163,14 @@
     <div class="page-wrapper">
       <div class="sidebar">
         <div class="filter-options">
-          <h3>Precio</h3>
+          <h3>{% translate "Precio" %}</h3>
           <ul class="list-group">
-            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=menos10">Menos de 10.000</a></li>
+            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=menos10">{% translate "Menos de " %} 10.000</a></li>
             <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=10a50">10.000 - 50.000</a></li>
             <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=50a80">50.000 - 80.000</a></li>
             <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=80a100">80.000 - 100.000</a></li>
-            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=mas100">Más de 100.000</a></li>
-            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="{{ request.path }}">Limpiar Filtros</a></li>
+            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=mas100">{% translate "Más de " %} 100.000</a></li>
+            <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="{{ request.path }}">{% translate "Limpiar filtros" %}</a></li>
           </ul>
         </div>
       </div>
@@ -181,7 +181,7 @@
             <div class="item-wrapper">
               <div class="item-image">
                 <img src="{% static p.product_image.url %}" alt="product pic">
-                <button class="btn-learn-more" onclick="window.location.href='{% url 'detail' pk=p.id %}'">Ver detalles</button>          
+                <button class="btn-learn-more" onclick="window.location.href='{% url 'detail' pk=p.id %}'">{% translate "Ver más" %}</button>          
               </div>
               <div class="item-info">
                 <h4>{{ p.name }}</h4>

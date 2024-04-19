@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,7 +38,7 @@
             color: #565656;
         }
         
-        /* Estilos adicionales según necesidades */
+
     </style>
 </head>
 <body>
@@ -53,28 +54,28 @@
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout-account' %}">Logout ({{ user.username }})</a>
+                            <a class="nav-link" href="{% url 'logout-account' %}">{% translate "Cerrar sesión " %} ({{ user.username }})</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'signup-account' %}">Crear Administrador</a>
+                            <a class="nav-link" href="{% url 'signup-account' %}">{% translate "Crear administrador" %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'stadistics' %}">Ver estadísticas</a>
+                            <a class="nav-link" href="{% url 'stadistics' %}">{% translate "Ver estadisticas" %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'create-product' %}">Crear producto</a>
+                            <a class="nav-link" href="{% url 'create-product' %}">{% translate "Crear producto" %}</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login-account' %}">Administrador</a>
+                            <a class="nav-link" href="{% url 'login-account' %}">{% translate "Iniciar sesión" %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'cart' %}">Carrito</a>
+                            <a class="nav-link" href="{% url 'cart' %}">{% translate "Carrito" %}</a>
                         </li>
                     {% endif %}
                 </ul>
                 <form class="d-flex" action="/search" method="get">
-                    <input class="form-control me-2" type="search" name="category" placeholder="Buscar categoría, ej: Accesorio" aria-label="Search">
+                    <input class="form-control me-2" type="search" name="category" placeholder="{% translate "Buscar por categoría" %}" aria-label="Search">
                     <button class="btn btn-custom" type="submit">
                         <i class="fas fa-search"></i>
                     </button>

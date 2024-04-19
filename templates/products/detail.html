@@ -1,5 +1,6 @@
 <!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -131,17 +132,17 @@
                         </div>
                     </div>
                     <div class="quantity-available">
-                        <p>Cantidad disponible: {{ product.quantity }}</p>
+                        <p>{% translate "Cantidad disponible" %}: {{ product.quantity }}</p>
                     </div>
                     {% if user.is_authenticated %}
                     <div class="action-buttons mt-3">
                       <a class="btn btn-outline-primary" href="{% url 'update-product' pk=product.id %}" role="button">
-                        <i class="fas fa-edit"></i> Modificar producto
+                        <i class="fas fa-edit"></i> {% translate "Modificar producto" %}
                       </a>
                     </div>
                     <div class="action-buttons mt-2">
                       <a class="btn btn-outline-danger" href="{% url 'delete-product' pk=product.id %}" role="button" onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
-                        <i class="fas fa-trash-alt"></i> Eliminar producto
+                        <i class="fas fa-trash-alt"></i> {% translate "Eliminar producto" %}
                       </a>
                     </div>
                     
@@ -149,16 +150,16 @@
                     
                     <div class="action-buttons mt-3 d-grid gap-2 d-md-block">
                       <button type="button" class="btn btn-success" onclick="addToCart()">
-                        <i class="fas fa-cart-plus"></i> Añadir al carrito
+                        <i class="fas fa-cart-plus"></i> {% translate "Añadir al carrito" %}
                       </button>
                       
                       <button type="button" class="btn btn-primary">
-                        <i class="fas fa-bolt"></i> Comprar ahora
+                        <i class="fas fa-bolt"></i> {% translate "Comprar ahora" %}
                       </button>
                     
                       {% if product.name == "Collar para perro" %}
                         <a href="{% url 'create-collar' %}" class="btn btn-info" role="button">
-                          <i class="fas fa-paint-brush"></i> Personalizar
+                          <i class="fas fa-paint-brush"></i> {% translate "Personalizar" %}
                         </a>
                       {% endif %}
                     </div>
@@ -166,13 +167,13 @@
                     {% endif %}
                   
                     {% if product.name == "Collar para perro" %}
-                      <h2>Lista de Collares</h2>
+                      <h2>{% translate "Lista de collares" %}</h2>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>ID del Collar</th>
-                                    <th>Nombre del Collar</th>
-                                    <th>Acciones</th>
+                                    <th>{% translate "ID del collar" %}</th>
+                                    <th>{% translate "Nombre del collar" %}</th>
+                                    <th>{% translate "Añadir" %}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -182,7 +183,7 @@
                                     <td>Collar {{ collar.id }}</td>
                                     <td>
                                       <a href="{% url 'add-to-cart' pk=product.id %}" class="btn btn-success" role="button">
-                                        <i class="fas fa-cart-plus"></i> Añadir al carrito
+                                        <i class="fas fa-cart-plus"></i> {% translate "Añadir al carrito" %}
                                     </a>
 
                                 </tr>

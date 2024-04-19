@@ -1,12 +1,13 @@
 <!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Crear collar</title>
+        <title>{% translate "Crear collar" %}</title>
     </head>
     <body>
         <div class="container top-margin">
@@ -22,7 +23,7 @@
                             <div class="form-group">
                                 <label for="id_color">Color</label>
                                 <select name="color" id="id_color" required class="form-select">
-                                    <option value="" disabled selected>Seleccionar color</option>
+                                    <option value="" disabled selected>{% translate "Seleccionar color" %}</option>
                                     {% for choice in collar_form.fields.color.choices %}
                                         <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                                     {% endfor %}
@@ -31,45 +32,45 @@
                             <div class="form-group">
                                 <label for="id_material">Material</label>
                                 <select name="material" id="id_material" required class="form-select">
-                                    <option value="" disabled selected>Seleccionar material</option>
+                                    <option value="" disabled selected>{% translate "Seleccionar material" %} </option>
                                     {% for choice in collar_form.fields.material.choices %}
                                         <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="id_size">Talla</label>
+                                <label for="id_size">{% translate "Talla"%}</label>
                                 <select name="size" id="id_size" required class="form-select">
-                                    <option value="" disabled selected>Seleccionar talla</option>
+                                    <option value="" disabled selected>{% translate "Seleccionar talla" %}</option>
                                     {% for choice in collar_form.fields.size.choices %}
                                         <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="id_text_color">Color de texto</label>
+                                <label for="id_text_color">{% translate "Color de texto" %}</label>
                                 <select name="text_color" id="id_text_color" required class="form-select">
-                                    <option value="" disabled selected>Seleccionar color de texto</option>
+                                    <option value="" disabled selected>{% translate "Seleccionar color de texto"%}</option>
                                     {% for choice in collar_form.fields.text_color.choices %}
                                         <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="id_font_type">Tipo de fuente</label>
+                                <label for="id_font_type">{% translate "Tipo de fuente" %}</label>
                                 <select name="font_type" id="id_font_type" required class="form-select">
-                                    <option value="" disabled selected>Seleccionar tipo de fuente</option>
+                                    <option value="" disabled selected>{% translate "Seleccionar tipo de fuente" %}</option>
                                     {% for choice in collar_form.fields.font_type.choices %}
                                         <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="id_design">Diseño</label>
+                                <label for="id_design">{% translate "Diseño" %}</label>
                                 <textarea name="design" id="id_design" required class="form-control"></textarea>
                             </div>
                             <div class="button-container mt-3">
-                                <button type="submit" class="btn btn-primary" style="background-color:#dcc79a; color: #000; border-radius: 25px; border: none; padding: 10px 20px;">Guardar selección</button>
+                                <button type="submit" class="btn btn-primary" style="background-color:#dcc79a; color: #000; border-radius: 25px; border: none; padding: 10px 20px;">{% translate "Guardar selección" %}</button>
                             </div>
                         </form>
                     </div>

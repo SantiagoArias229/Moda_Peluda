@@ -2,19 +2,22 @@ from django.shortcuts import get_object_or_404, render, redirect
 from orders.models import Order
 from products.models import Product
 from .forms import OrderForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from urllib.parse import unquote
 from django.db.models.functions import TruncMonth
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.db.models import Count
-from django.shortcuts import render
-from django.shortcuts import render
-from django.core.serializers import serialize
 from .models import Order
-import json
-from django.core.serializers.json import DjangoJSONEncoder
+from django.conf import settings
+import paypalrestsdk
+
+paypalrestsdk.configure({
+    "mode": "sandbox",  # O "live" para entorno de producción
+    "client_id": settings.PAYPAL_CLIENT_ID,
+    "client_secret": settings.PAYPAL_CLIENT_SECRET,
+})
 
 
 def create_order(request):
@@ -97,3 +100,32 @@ def view_stadistics(request):
     }
 
     return render(request, 'orders/order_stadistics.html', context)
+
+
+
+
+def payment_view(request):
+    payment = paypalrestsdk.Payment({
+      "intent": "sale",
+      "payer": {
+        "payment_method": "paypal"
+      },
+      "redirect_urls": {
+        "return_url": request.build_absolute_uri(reverse('')),
+        "cancel_url": request.build_absolute_uri(reverse(''))
+      },
+      "transactions": [{
+        "amount": {
+          "total": "10.00",
+          "currency": "USD"
+        },
+        "description": "Descripción del pago"
+      }]
+    })
+    if payment.create():
+        for link in payment.links:
+            if link.method == "REDIRECT":
+                redirect_url = str(link.href)
+                return redirect(redirect_url)
+    else:
+        return HttpResponse('Error al iniciar el pago: %s' % payment.error)

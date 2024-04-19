@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
             <h3 class="fw-bold mb-4" style="font-size: 2.5rem;">
-                Producto Añadido Exitosamente
+                {% translate "Producto añadido exitosamente" %}
             </h3>
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <a class="btn btn-primary btn-lg me-md-2" href="{% url '' %}" role="button" style="background-color: #cda09b; #color: #000; border: none; padding: 10px 20px;">Seguir Comprando</a>
-                <a class="btn btn-secondary btn-lg" href="{% url 'cart' %}" role="button">Ir al carrito</a>
+                <a class="btn btn-primary btn-lg me-md-2" href="{% url '' %}" role="button" style="background-color: #cda09b; #color: #000; border: none; padding: 10px 20px;">{% translate "Seguir comprando" %}</a>
+                <a class="btn btn-secondary btn-lg" href="{% url 'cart' %}" role="button">{% translate "Ir al carrito" %}</a>
             </div>
         </div>
        
