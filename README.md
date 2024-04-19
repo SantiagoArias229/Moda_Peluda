@@ -46,6 +46,7 @@ cd moda-peluda
   ```
   pip install django
   pip install -r requirements.txt
+  pip install paypalrestsdk
   ```
 
 ### Configuración
