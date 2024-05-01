@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ventas por Mes y Detalle de Órdenes</title>
+    <title>{% translate "Venta por mes y detalle de orden" %}</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -40,17 +41,17 @@
     </script>
 
     
-    <h2>Detalle de Órdenes</h2>
+    <h2>{% translate "Detalle de ordenes" %}</h2>
 <div class="table-responsive"> 
     <table class="table table-bordered table-hover shadow-sm"> 
         <thead class="table-light"> 
             <tr>
-                <th>ID</th>
-                <th>Nombre del Cliente</th>
-                <th>Tipo de Pago</th>
-                <th>Dirección</th>
-                <th>Correo Electrónico</th>
-                <th>Fecha</th>
+                <th>{% translate "ID" %}</th>
+                <th>{% translate "Nombre del cliente" %}</th>
+                <th>{% translate "Tipo de pago" %}</th>
+                <th>{% translate "Dirección" %}</th>
+                <th>{% translate "Correo electronico" %}</th>
+                <th>{% translate "Fecha" %}</th>
             </tr>
         </thead>
         <tbody>

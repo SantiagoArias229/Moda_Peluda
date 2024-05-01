@@ -1,4 +1,5 @@
 {% extends "base.html" %}  
+{% load i18n %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,23 +10,23 @@
 </head>
 <body>
     <div id="orderConfirmation">
-        <h1>Confirmación de Orden</h1>
-        <p>Orden ID: {{ order.id }}</p>
-        <p>Cliente: {{ order.customer_name }}</p>
-        <p>Dirección: {{ order.address }}</p>
-        <p>Email: {{ order.email }}</p>
-        <p>Tipo de Pago: {{ order.get_payment_type_display }}</p>
+        <h1>{% translate "Confirmación de orden" %}</h1>
+        <p>{% translate "ID Orden" %}: {{ order.id }}</p>
+        <p>{% translate "Cliente" %}: {{ order.customer_name }}</p>
+        <p>{% translate "Dirección" %}: {{ order.address }}</p>
+        <p>{% translate "Correo electronico" %}: {{ order.email }}</p>
+        <p>{% translate "Tipo de pago" %}: {{ order.get_payment_type_display }}</p>
 
-        <h2>Productos:</h2>
+        <h2>{% translate "Productos" %}:</h2>
         <div class="card-body p-0">
             <table class="table mb-0">
                 <thead>
                     <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>Descripción</th>
-                        <th>Subtotal</th>
+                        <th>{% translate "Producto" %}</th>
+                        <th>{% translate "Cantidad" %}</th>
+                        <th>{% translate "Precio" %}</th>
+                        <th>{% translate "Descripción" %}</th>
+                        <th>{% translate "Subtotal" %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +40,7 @@
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="6">No hay productos en el carrito.</td>
+                        <td colspan="6">{% translate "No hay más productos en el carrito" %}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -49,7 +50,7 @@
             <h5>Total: ${{ total }}</h5>
         </div>
     </div>
-    <button onclick="downloadConfirmation()">Descargar Confirmación</button>
+    <button onclick="downloadConfirmation()">{% translate "Descargar confirmación: " %}</button>
     <script>
         function downloadConfirmation() {
             html2canvas(document.getElementById("orderConfirmation")).then(function(canvas) {

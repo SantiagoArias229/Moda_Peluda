@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-19 11:40-0500\n"
+"POT-Creation-Date: 2024-05-01 12:03-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,109 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\accounts\forms.py:28 .\accounts\forms.py:34
+msgid "Nombre de usuario"
+msgstr "Username"
+
+#: .\accounts\forms.py:29 .\accounts\forms.py:35
+msgid "Contraseña"
+msgstr "Password"
+
+#: .\accounts\forms.py:36
+msgid "Contraseña (confirmación)"
+msgstr "Password (Confirm) "
+
+#: .\accounts\views.py:39
+msgid "Usuario y contraseña no coinciden"
+msgstr "username and password does not match"
+
+#: .\orders\forms.py:10 .\templates\orders\order_stadistics.html:50
+msgid "Nombre del cliente"
+msgstr "Customer name"
+
+#: .\orders\forms.py:11 .\templates\orders\order_comfirmation.html:18
+#: .\templates\orders\order_stadistics.html:51
+msgid "Tipo de pago"
+msgstr "Payment method"
+
+#: .\orders\forms.py:12 .\templates\orders\order_comfirmation.html:16
+#: .\templates\orders\order_stadistics.html:52
+msgid "Dirección"
+msgstr "Address"
+
+#: .\orders\forms.py:13 .\templates\orders\order_comfirmation.html:17
+#: .\templates\orders\order_stadistics.html:53
+msgid "Correo electronico"
+msgstr "Email"
+
+#: .\products\models.py:20
+msgid "Algodón"
+msgstr "Cotton"
+
+#: .\products\models.py:21
+msgid "Poliéster"
+msgstr "Polyester"
+
+#: .\products\models.py:22
+msgid "Cuero"
+msgstr "Leather"
+
+#: .\products\models.py:23
+msgid "Metálico"
+msgstr "Metal"
+
+#: .\products\models.py:27 .\products\models.py:43
+msgid "Negro"
+msgstr "Black"
+
+#: .\products\models.py:28
+msgid "Blanco"
+msgstr "White"
+
+#: .\products\models.py:29 .\products\models.py:44
+msgid "Rojo"
+msgstr "Red"
+
+#: .\products\models.py:30 .\products\models.py:45
+msgid "Azul"
+msgstr "Blue"
+
+#: .\products\models.py:31 .\products\models.py:46
+msgid "Verde"
+msgstr "Green"
+
+#: .\products\models.py:32 .\products\models.py:47
+msgid "Rosado"
+msgstr "Pink"
+
+#: .\products\models.py:33 .\products\models.py:48
+msgid "Morado"
+msgstr "Purple"
+
+#: .\products\models.py:37
+msgid "Pequeño"
+msgstr "Small"
+
+#: .\products\models.py:38
+msgid "Mediano"
+msgstr "Medium"
+
+#: .\products\models.py:39
+msgid "Grande"
+msgstr "Big"
+
+#: .\products\models.py:52
+msgid "Impact"
+msgstr "Impact"
+
+#: .\products\models.py:53
+msgid "Verdana"
+msgstr "Verdana"
+
+#: .\products\models.py:54
+msgid "Comic Sans MS"
+msgstr "Comic Sans MS"
 
 #: .\templates\accounts\loginAccount.html:19
 msgid "Ingreso administrador"
@@ -58,63 +161,66 @@ msgstr "Cart"
 msgid "Buscar por categoría"
 msgstr "Search by category"
 
-#: .\templates\cart\cart.html:17
+#: .\templates\cart\cart.html:18
 msgid "Mi carrito"
 msgstr "Cart"
 
-#: .\templates\cart\cart.html:23
+#: .\templates\cart\cart.html:24 .\templates\orders\order_comfirmation.html:25
 msgid "Producto"
 msgstr "Product"
 
-#: .\templates\cart\cart.html:24 .\templates\products\create_product.html:89
+#: .\templates\cart\cart.html:25 .\templates\orders\order_comfirmation.html:26
+#: .\templates\products\create_product.html:89
 #: .\templates\products\update_product.html:86
 msgid "Cantidad"
 msgstr "Quantity"
 
-#: .\templates\cart\cart.html:25 .\templates\customer_home.html:166
+#: .\templates\cart\cart.html:26 .\templates\customer_home.html:166
+#: .\templates\orders\order_comfirmation.html:27
 #: .\templates\products\create_product.html:78
 #: .\templates\products\update_product.html:82
 msgid "Precio"
 msgstr "Price"
 
-#: .\templates\cart\cart.html:26 .\templates\products\create_product.html:74
+#: .\templates\cart\cart.html:27 .\templates\orders\order_comfirmation.html:28
+#: .\templates\products\create_product.html:74
 #: .\templates\products\update_product.html:74
 msgid "Descripción"
 msgstr "Description"
 
-#: .\templates\cart\cart.html:27
+#: .\templates\cart\cart.html:28 .\templates\orders\order_comfirmation.html:29
 msgid "Subtotal"
 msgstr "Subtotal"
 
-#: .\templates\cart\cart.html:28
+#: .\templates\cart\cart.html:29
 msgid "Acción"
 msgstr "Action"
 
-#: .\templates\cart\cart.html:39
+#: .\templates\cart\cart.html:40
 msgid "Eliminar"
 msgstr "Delete"
 
-#: .\templates\cart\cart.html:43
+#: .\templates\cart\cart.html:44
 msgid "No hay productos en el carrito"
 msgstr "The cart is empty"
 
-#: .\templates\cart\cart.html:54
+#: .\templates\cart\cart.html:55
 msgid "Comprar"
 msgstr "Buy"
 
-#: .\templates\cart\cart.html:57
+#: .\templates\cart\cart.html:58
 msgid "Vaciar carrito"
 msgstr "Empty cart"
 
-#: .\templates\cart\cart.html:62 .\templates\cart\cart_success.html:11
+#: .\templates\cart\cart.html:63 .\templates\cart\cart_success.html:12
 msgid "Seguir comprando"
 msgstr "Keep looking"
 
-#: .\templates\cart\cart_success.html:8
+#: .\templates\cart\cart_success.html:9
 msgid "Producto añadido exitosamente"
 msgstr "Product added successfully"
 
-#: .\templates\cart\cart_success.html:12
+#: .\templates\cart\cart_success.html:13
 msgid "Ir al carrito"
 msgstr "Go to cart"
 
@@ -133,6 +239,64 @@ msgstr "Clean filter"
 #: .\templates\customer_home.html:184
 msgid "Ver más"
 msgstr "Show more"
+
+#: .\templates\orders\order_comfirmation.html:13
+msgid "Confirmación de orden"
+msgstr "Order confirmation"
+
+#: .\templates\orders\order_comfirmation.html:14
+msgid "ID Orden"
+msgstr "Order ID"
+
+#: .\templates\orders\order_comfirmation.html:15
+msgid "Cliente"
+msgstr "Customer"
+
+#: .\templates\orders\order_comfirmation.html:20
+msgid "Productos"
+msgstr "Products"
+
+#: .\templates\orders\order_comfirmation.html:43
+#, fuzzy
+#| msgid "No hay productos en el carrito"
+msgid "No hay más productos en el carrito"
+msgstr "The cart is empty"
+
+#: .\templates\orders\order_comfirmation.html:53
+msgid "Descargar confirmación: "
+msgstr "Download confirmation: "
+
+#: .\templates\orders\order_form.html:65
+msgid "Crear una nueva orden"
+msgstr "Create a new order"
+
+#: .\templates\orders\order_form.html:71
+msgid "Enviar orden"
+msgstr "Send order"
+
+#: .\templates\orders\order_form.html:72 .\templates\orders\payment.html:17
+msgid "Pagar con Paypal"
+msgstr "Pay with Paypal"
+
+#: .\templates\orders\order_stadistics.html:8
+msgid "Venta por mes y detalle de orden"
+msgstr "Order detail and sale by month"
+
+#: .\templates\orders\order_stadistics.html:44
+msgid "Detalle de ordenes"
+msgstr "Orders detail"
+
+#: .\templates\orders\order_stadistics.html:49
+msgid "ID"
+msgstr "ID"
+
+#: .\templates\orders\order_stadistics.html:54
+msgid "Fecha"
+msgstr "Date"
+
+#: .\templates\orders\payment.html:13
+msgid "Formulario de pago"
+msgstr "Payment form"
 
 #: .\templates\products\create_collar.html:10
 #, fuzzy
@@ -260,6 +424,16 @@ msgstr "Category"
 #: .\templates\products\update_product.html:96
 msgid "Actualizar detalles"
 msgstr "Update details"
+
+#, fuzzy
+#~| msgid "Nombre del cliente"
+#~ msgid "Nombre del Cliente"
+#~ msgstr "Customer name"
+
+#, fuzzy
+#~| msgid "Correo electronico"
+#~ msgid "Correo Electrónico"
+#~ msgstr "Email"
 
 #, fuzzy
 #~| msgid "Iniciar sesión"

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -9,11 +10,11 @@
     <title>Formulario de Pago</title>
 </head>
 <body>
-    <h1>Formulario de Pago</h1>
+    <h1>{% translate "Formulario de pago" %}</h1>
     <form action="{% url 'payment' %}" method="post">
         {% csrf_token %}
         <!-- Aquí puedes agregar campos adicionales del formulario si es necesario -->
-        <button type="submit">Pagar con PayPal</button>
+        <button type="submit">{% translate "Pagar con Paypal" %}</button>
     </form>
 </body>
 </html>
