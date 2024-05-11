@@ -34,8 +34,9 @@ def login_account_view(request):
     else:
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
+            form = AuthenticationForm(request, data=request.POST)
             return render(request, 'accounts/loginAccount.html', {
-                'form': AuthenticationForm(),
+                'form': form,
                 'error': _('Usuario y contraseña no coinciden')  # Mensaje de error traducible
             })
         else:
