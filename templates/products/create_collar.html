@@ -1,82 +1,94 @@
-<!-- Hecho por: Vanessa Velez Restrepo-->
+<!-- collar_form.html -->
 {% extends 'base.html' %}
 {% load i18n %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>{% translate "Crear collar" %}</title>
-    </head>
-    <body>
-        <div class="container top-margin">
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <div class="product-body text-center">
-                        <div class="card border-0">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded">
+<head>
+    <meta charset="UTF-8">
+    <title>{% translate "Crear collar" %}</title>
+    <style>
+        .form-label-group {
+            margin-bottom: 1rem;
+        }
+        .form-control, .form-select {
+            border-radius: 50px;
+            height: calc(2.25rem + 2px);
+        }
+        .card {
+            margin-top: 2rem;
+        }
+        .btn-custom {
+            background-color: #dcc79a;
+            color: #000;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+        }
+        .note {
+            text-align: center;
+            height: 80px;
+            background: #0F2027;
+            background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);
+            background: linear-gradient(to left, #2C5364, #203A43, #0F2027);
+            color: #fff;
+            font-weight: bold;
+            line-height: 80px;
+        }
+        .product-body {
+            margin-top: 20px;
+        }
+        .button-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="product-body text-center">
+                            <div class="card border-0">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded">
+                            </div>
                         </div>
                         <form method="post" enctype="multipart/form-data" class="mt-4">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <label for="id_color">Color</label>
-                                <select name="color" id="id_color" required class="form-select">
-                                    <option value="" disabled selected>{% translate "Seleccionar color" %}</option>
-                                    {% for choice in collar_form.fields.color.choices %}
-                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                    {% endfor %}
-                                </select>
+                            <div class="form-label-group my-3">
+                                <label for="id_color">{% translate "Color" %}</label>
+                                {{ collar_form.color }}
                             </div>
-                            <div class="form-group">
-                                <label for="id_material">Material</label>
-                                <select name="material" id="id_material" required class="form-select">
-                                    <option value="" disabled selected>{% translate "Seleccionar material" %} </option>
-                                    {% for choice in collar_form.fields.material.choices %}
-                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                    {% endfor %}
-                                </select>
+                            <div class="form-label-group my-3">
+                                <label for="id_material">{% translate "Material" %}</label>
+                                {{ collar_form.material }}
                             </div>
-                            <div class="form-group">
-                                <label for="id_size">{% translate "Talla"%}</label>
-                                <select name="size" id="id_size" required class="form-select">
-                                    <option value="" disabled selected>{% translate "Seleccionar talla" %}</option>
-                                    {% for choice in collar_form.fields.size.choices %}
-                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                    {% endfor %}
-                                </select>
+                            <div class="form-label-group my-3">
+                                <label for="id_size">{% translate "Talla" %}</label>
+                                {{ collar_form.size }}
                             </div>
-                            <div class="form-group">
+                            <div class="form-label-group my-3">
                                 <label for="id_text_color">{% translate "Color de texto" %}</label>
-                                <select name="text_color" id="id_text_color" required class="form-select">
-                                    <option value="" disabled selected>{% translate "Seleccionar color de texto"%}</option>
-                                    {% for choice in collar_form.fields.text_color.choices %}
-                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                    {% endfor %}
-                                </select>
+                                {{ collar_form.text_color }}
                             </div>
-                            <div class="form-group">
+                            <div class="form-label-group my-3">
                                 <label for="id_font_type">{% translate "Tipo de fuente" %}</label>
-                                <select name="font_type" id="id_font_type" required class="form-select">
-                                    <option value="" disabled selected>{% translate "Seleccionar tipo de fuente" %}</option>
-                                    {% for choice in collar_form.fields.font_type.choices %}
-                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                    {% endfor %}
-                                </select>
+                                {{ collar_form.font_type }}
                             </div>
-                            <div class="form-group">
+                            <div class="form-label-group my-3">
                                 <label for="id_design">{% translate "Diseño" %}</label>
-                                <textarea name="design" id="id_design" required class="form-control"></textarea>
+                                {{ collar_form.design }}
                             </div>
-                            <div class="button-container mt-3">
-                                <button type="submit" class="btn btn-primary" style="background-color:#dcc79a; color: #000; border-radius: 25px; border: none; padding: 10px 20px;">{% translate "Guardar selección" %}</button>
-                            </div>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #dcc79a; #color: #000; border: none;">{% translate "Guardar selección" %}</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
 {% endblock content %}

@@ -1,16 +1,18 @@
 #Hecho por: Vanessa Velez Restrepo
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MinValueValidator
+
 
 
 
 class Product(models.Model):
     name=models.CharField(max_length=40)
     description=models.CharField(max_length=40)
-    product_image= models.ImageField(upload_to='product_image/',null=False,blank=False)
-    price = models.PositiveIntegerField()
+    product_image= models.ImageField(upload_to='product_image/',null=True,blank=True , default="product_image/aaaa.jpg")
+    price = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     category = models.CharField(max_length = 70)
-    quantity = models.IntegerField()
+    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     def __str__(self):
         return str(self.name)
     

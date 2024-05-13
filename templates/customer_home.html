@@ -1,5 +1,9 @@
 <!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
+{% comment %} {% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="">Home</a></li>
+{% endblock %} {% endcomment %}
+
 {% load i18n %}
 {% load static %}
 {% block content %}
@@ -163,7 +167,7 @@
     <div class="page-wrapper">
       <div class="sidebar">
         <div class="filter-options">
-          <h3>{% translate "Precio" %}</h3>
+          <h3>{% translate "Precio" %} </h3>
           <ul class="list-group">
             <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=menos10">{% translate "Menos de " %} 10.000</a></li>
             <li style="background-color: #dcc79a; color: black; border: 2px; margin-right: 8px; " href="?price=menos10" class="list-group-item"><a href="?price=10a50">10.000 - 50.000</a></li>

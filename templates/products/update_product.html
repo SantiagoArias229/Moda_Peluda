@@ -1,102 +1,86 @@
-<!-- Hecho por: Vanessa Velez Restrepo-->
+<!-- modify_product.html -->
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Modificar productos</title>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <style media="screen">
-            a:link {
-                text-decoration: none;
-            }
-
-            .note {
-                text-align: center;
-                height: 80px;
-                background: #0F2027;  /* fallback for old browsers */
-                background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
-                background: linear-gradient(to left, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-                color: #fff;
-                font-weight: bold;
-                line-height: 80px;
-            }
-
-            .form-content {
-                padding: 5%;
-                border: 1px solid #ced4da;
-                margin-bottom: 2%;
-            }
-
-            .form-control {
-                border-radius: 1.5rem;
-            }
-
-            .btnSubmit {
-                border: none;
-                border-radius: 1.5rem;
-                padding: 1%;
-                width: 20%;
-                cursor: pointer;
-                background: #009414;
-                color: #fff;
-            }
-
-            
-
-            .menu {
-                top: 50px;
-            }
-        </style>
-    </head>
-
-    <body>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="container register-form">
-            <div class="form">
-                <div class="note">
-                <p>{% translate "Modificar detalles del producto" %}</p>
+<head>
+    <meta charset="UTF-8">
+    <title>{% translate "Modificar detalles del producto" %}</title>
+    <style>
+        .form-label-group {
+            margin-bottom: 1rem;
+        }
+        .form-control {
+            border-radius: 50px;
+            height: calc(2.25rem + 2px);
+        }
+        .card {
+            margin-top: 2rem;
+        }
+        .btn-custom {
+            background-color: #dcc79a;
+            color: #000;
+            border: none;
+            border-radius: 0;
+        }
+        .note {
+            text-align: center;
+            height: 80px;
+            background: #0F2027;
+            background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);
+            background: linear-gradient(to left, #2C5364, #203A43, #0F2027);
+            color: #fff;
+            font-weight: bold;
+            line-height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <h1 class="h3 mb-3 font-weight-normal card-title text-center">{% translate "Modificar detalles del producto" %}</h1>
+                            {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                            {% endif %}
+                            <div class="form-label-group my-3">
+                                <label for="id_name">{% translate "Nombre" %}</label>
+                                {{ productForm.name }}
+                            </div>
+                            <div class="form-label-group my-3">
+                                <label for="id_description">{% translate "Descripción" %}</label>
+                                {{ productForm.description }}
+                            </div>
+                            <div class="form-label-group my-3">
+                                <label for="id_category">{% translate "Categoría" %}</label>
+                                {{ productForm.category }}
+                            </div>
+                            <div class="form-label-group my-3">
+                                <label for="id_price">{% translate "Precio" %}</label>
+                                {{ productForm.price }}
+                            </div>
+                            <div class="form-label-group my-3">
+                                <label for="id_quantity">{% translate "Cantidad" %}</label>
+                                {{ productForm.quantity }}
+                            </div>
+                            <div class="form-label-group my-3">
+                                <label for="id_product_image">{% translate "Imagen" %}</label>
+                                {{ productForm.product_image }}
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #dcc79a; #color: #000; border: none;">{% translate "Actualizar detalles" %}</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-content">
-                <div class="row">
-                    <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="id_name">{% translate "Nombre" %}</label>
-                        {{ productForm.name }}
-                    </div>
-                    <div class="form-group">
-                        <label for="id_description">{% translate "Descripción" %}</label>
-                        {{ productForm.description }}
-                    </div>
-                    <div class="form-group">
-                        <label for="id_category">{% translate "Categoría" %}</label>
-                        {{ productForm.category }}
-                    </div>
-                    <div class="form-group">
-                        <label for="id_price">{% translate "Precio" %}</label>
-                        {{ productForm.price }}
-                    </div>
-                    <div class="form-group">
-                        <label for="id_quantity">{% translate "Cantidad" %}</label>
-                        {{ productForm.quantity }}
-                    </div>
-                    <div class="form-group">
-                        <label for="id_product_image">{% translate "Imagen" %}</label>
-                        {{ productForm.product_image }}
-                    </div>
-                    
-                </div>
-                </div>
-                <button type="submit" class="btnSubmit">{% translate "Actualizar detalles" %}</button>
             </div>
-            </div>
-        </form>
-    </body>
+        </div>
+    </div>
+</body>
 </html>
 {% endblock content %}

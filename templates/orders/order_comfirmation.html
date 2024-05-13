@@ -50,7 +50,7 @@
             <h5>Total: ${{ total }}</h5>
         </div>
     </div>
-    <button onclick="downloadConfirmation()">{% translate "Descargar confirmación: " %}</button>
+    <button class="btn btn-lg btn-primary btn-block" style="background-color: #dcc79a; #color: #000; border: none;" onclick="downloadConfirmation()">{% translate "Descargar confirmación: " %}</button>
     <script>
         function downloadConfirmation() {
             html2canvas(document.getElementById("orderConfirmation")).then(function(canvas) {

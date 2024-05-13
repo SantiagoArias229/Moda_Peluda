@@ -15,7 +15,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header bg-success text-white">
-                    <h5 class="mb-0">{% translate "Mi carrito" %}</h5>
+                    <h5 class="mb-0" >{% translate "Mi carrito" %}</h5>
                 </div>
                 <div class="card-body p-0">
                     <table class="table mb-0">
@@ -52,15 +52,15 @@
                 <h5>Total: ${{ total }}</h5>
                 <div>
                     {% if total != 0 %}
-                    <a href="/checkout" class="btn btn-primary">{% translate "Comprar" %}</a>
+                    <a href="/checkout" style="background-color: #dcc79a; border:none;" class="btn btn-primary">{% translate "Comprar" %}</a>
                     <a href="" onclick="borrarCookies()" class="btn btn-lg">
-                        <button class="btn btn-primary">
+                        <button style="background-color: #dcc79a; border:none;" class="btn btn-primary">
                             <span>{% translate "Vaciar carrito"  %} </span>
                         </button>
                     </a>
                     {% endif %}
 
-                    <a href="{% url '' %}" class="btn btn-primary">{% translate "Seguir comprando" %}</a>
+                    <a href="{% url '' %}" style="background-color: #dcc79a; border:none;" class="btn btn-primary">{% translate "Seguir comprando" %}</a>
                 </div>
             </div>
         </div>

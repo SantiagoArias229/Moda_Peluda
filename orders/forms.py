@@ -10,5 +10,11 @@ class OrderForm(forms.ModelForm):
             'customer_name': _('Nombre del cliente'),
             'payment_type': _('Tipo de pago'),
             'address': _('Dirección'),
-            'email': _('Correo electronico'),
+            'email': _('Correo electrónico'),
+        }
+        widgets = {
+            'customer_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'payment_type': forms.Select(attrs={'class': 'form-select'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }

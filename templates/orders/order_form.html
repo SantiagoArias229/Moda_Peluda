@@ -1,76 +1,79 @@
+<!-- orders_form.html -->
 {% extends 'base.html' %}
 {% load i18n %}
-{% load static %}
 {% block content %}
-
-<style>
-    body {
-        padding-top: 70px; /* Ajusta según la altura de tu navbar si tienes uno */
-    }
-    .container {
-        max-width: 800px; /* Ajusta este valor según prefieras */
-    }
-    .btn-custom {
-        border: none;
-        border-radius: 25px;
-        padding: 10px 20px;
-        font-size: 16px;
-        transition: background-color 0.2s ease-in-out;
-    }
-    .btn-primary-custom {
-        background-color: #007bff;
-        color: #fff;
-    }
-    .btn-primary-custom:hover {
-        background-color: #0056b3;
-    }
-    .form-group {
-        margin-bottom: 1rem;
-    }
-    .form-control {
-        display: block;
-        width: 100%;
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        color: #495057;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        border-radius: 0.25rem;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-    .form-control:focus {
-        color: #495057;
-        background-color: #fff;
-        border-color: #80bdff;
-        outline: 0;
-        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-    }
-    .btn-submit {
-        font-size: 18px;
-        padding: 10px 24px;
-        border-radius: 30px; /* Botón más redondeado */
-        color: #fff; /* Texto blanco */
-        background-color: #007bff; /* Azul de Bootstrap */
-        border-color: #007bff;
-    }
-    .btn-submit:hover {
-        background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
-        border-color: #0056b3;
-    }
-</style>
-
-<div class="container">
-    <h1 class="mb-4">{% translate "Crear una nueva orden" %}</h1>
-    <form method="post" class="needs-validation" novalidate>
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.as_p }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% translate "Crear una nueva orden" %}</title>
+    <style>
+        .form-label-group {
+            margin-bottom: 1rem;
+        }
+        .card {
+            margin-top: 2rem;
+        }
+        .btn-custom {
+            background-color: #dcc79a;
+            color: #000;
+            border: none;
+        }
+        .btn-paypal {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+        }
+        .btn-paypal:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <h1 class="h3 mb-3 font-weight-normal card-title text-center">{% translate "Crear una nueva orden" %}</h1>
+                            {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                            {% endif %}
+                            <div class="form-label-group">
+                                <label for="id_customer_name">{% translate "Nombre del cliente" %}</label>
+                                {{ form.customer_name }}
+                            </div>
+                            <div class="form-label-group">
+                                <label for="id_payment_type">{% translate "Tipo de pago" %}</label>
+                                {{ form.payment_type }}
+                            </div>
+                            <div class="form-label-group">
+                                <label for="id_address">{% translate "Dirección" %}</label>
+                                {{ form.address }}
+                            </div>
+                            <div class="form-label-group">
+                                <label for="id_email">{% translate "Correo electrónico" %}</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="button-container mt-3 text-center">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #dcc79a; #color: #000; border: none;">{% translate "Enviar orden" %}</button>
+                                <a type="submit" href="{% url 'payment' %}" class="btn btn-lg btn-primary">{% translate "Pagar con Paypal" %}</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button style="background-color: #dcc79a;" type="submit" class="btn btn-primary-custom">{% translate "Enviar orden" %}</button>
-        <a href="{% url 'payment' %}" class="btn btn-primary">{% translate "Pagar con Paypal" %}</a>
-    </form>
-</div>
-
-{% endblock %}
+    </div>
+</body>
+</html>
+{% endblock content %}

@@ -1,5 +1,6 @@
 <!-- Hecho por: Vanessa Velez Restrepo-->
 {% extends 'base.html' %}
+
 {% load i18n %}
 {% load static %}
 {% block content %}
@@ -185,19 +186,20 @@
                                       <a href="{% url 'add-to-cart' pk=product.id %}" class="btn btn-success" role="button">
                                         <i class="fas fa-cart-plus"></i> {% translate "Añadir al carrito" %}
                                     </a>
-
+                                    
                                 </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     {% endif%}
+                    <br>
                 </div>
                 
             </div>
             
         </div>
     </div>
-
+    
     <script>
         var quantity = 0;
         var availableQuantity = {{ product.quantity }};
@@ -236,7 +238,6 @@
           window.location.href = `{% url 'add-to-cart' pk=product.id %}?quantity=` + quantity;
       }
     </script>
-
   </body>
 </html>
 {% endblock content %}

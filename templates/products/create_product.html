@@ -1,105 +1,71 @@
-<!-- Hecho por: Vanessa Velez Restrepo-->
+<!-- create_product.html -->
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>Crear producto</title>
-    <style media="screen">
-      a:link {
-        text-decoration: none;
-      }
-  
-      .note {
-        text-align: center;
-        height: 50px;
-        color: #black;
-        font-weight: bold;
-        line-height: 80px;
-      }
-  
-      .form-content {
-        padding: 5%;
-        border: 1px solid #ced4da;
-        margin-bottom: 2%;
-        align-items: center;
-        display: flex;
-
-      }
-  
-      .form-control {
-        border-radius: 1.5rem;
-      }
-  
-      .btnSubmit {
-        border: none;
-        border-radius: 1.5rem;
-        padding: 1%;
-        width: 20%;
-        cursor: pointer;
-        background: #009414;
-        color: #fff;
-
-      }
-  
-      .menu {
-        top: 50px;
-      }
-
-        
+    <style>
+        .form-label-group {
+            margin-bottom: 1rem;
+        }
+        .card {
+            margin-top: 2rem;
+        }
+        .btn-custom {
+            background-color: #dcc79a;
+            color: #000;
+            border: none;
+        }
     </style>
-  
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="container register-form">
-        <div class="form">
-          <div class="note">
-            <p>{% translate  "Añadir productos" %}</p>
-          </div>
-          <div class="form-content">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="id_name">{% translate "Nombre del producto" %}</label>
-                  {{ productForm.name }}
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <h1 class="h3 mb-3 font-weight-normal card-title text-center">{% translate "Añadir productos" %}</h1>
+                            {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                            {% endif %}
+                            <div class="form-label-group">
+                                <label for="id_name">{% translate "Nombre del producto" %}</label>
+                                {{ productForm.name }}
+                            </div>
+                            <div class="form-label-group">
+                                <label for="id_description">{% translate "Descripción" %}</label>
+                                {{ productForm.description }}
+                            </div>
+                            <div class="form-label-group">
+                                <label for="id_price">{% translate "Precio" %}($)</label>
+                                {{ productForm.price }}
+                            </div>
+                            <div class="form-label-group">
+                                <label for="id_category">{% translate "Categoría" %}</label>
+                                {{ productForm.category }}
+                            </div>
+                            <div class="form-label-group">
+                                <label for="id_quantity">{% translate "Cantidad" %}</label>
+                                {{ productForm.quantity }}
+                            </div>
+                            <div class="form-label-group">
+                                <label for="id_product_image">{% translate "Imagen" %}</label>
+                                {{ productForm.product_image }}
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #dcc79a; #color: #000; border: none;">{% translate "Añadir" %}</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <label for="id_description">{% translate "Descripción" %}</label>
-                  {{ productForm.description }}
-                </div>
-                <div class="form-group">
-                    <label for="id_price">{% translate "Precio" %}($)</label>
-                    {{ productForm.price }}
-                  </div>
-              </div>
-              <div class="col-md-6">
-                
-                <div class="form-group">
-                    <label for="id_category">{% translate "Categoria" %}</label>
-                    {{ productForm.category }}
-                </div>
-                <div class="form-group">
-                    <label for="id_quantity">{% translate "Cantidad" %}</label>
-                    {{ productForm.quantity }}
-                </div>
-                <div class="form-group">
-                  <label for="id_product_image">{% translate "Imagen" %}</label>
-                  {{ productForm.product_image }}
-                </div>
-              </div>
             </div>
-            <button type="submit" class="btnSubmit">{% translate "AÑADIR" %}</button>
-          </div>
         </div>
-      </div>
-    </form>
-  </body>
+    </div>
+</body>
 </html>
 {% endblock content %}
