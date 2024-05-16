@@ -185,7 +185,7 @@
             <div class="item-wrapper">
               <div class="item-image">
                 <img src="{% static p.product_image.url %}" alt="product pic">
-                <button class="btn-learn-more" onclick="window.location.href='{% url 'detail' pk=p.id %}'">{% translate "Ver más" %}</button>          
+                          
               </div>
               <div class="item-info">
                 <h4>{{ p.name }}</h4>
@@ -193,6 +193,7 @@
                 <div class="item-price">
                   ${{ p.price }} COP
                 </div>
+                <button style="background-color: #dcc79a; border:none;" class="btn btn-success" role="button" onclick="window.location.href='{% url 'detail' pk=p.id %}'">{% translate "Ver más" %}</button>
               </div>
             </div>
           {% endfor %}
