@@ -99,3 +99,32 @@ def remove_from_cart_view(request, pk):
     else:
         return redirect('cart')
 
+def buy_now_view(request, pk):
+    quantity = request.GET.get('quantity', 1)
+    product = Product.objects.get(id=pk)
+    product_cookie_value = f"{pk}:{quantity}"
+    if 'product_ids' in request.COOKIES:
+        product_ids = unquote(request.COOKIES['product_ids'])
+        product_list = product_ids.split('|')
+        updated_product_list = []
+        product_found = False
+        for item in product_list:
+            if ':' in item:
+                product_id, existing_quantity = item.split(':')
+                if product_id == str(pk):
+                    item = f"{pk}:{quantity}"
+                    product_found = True
+            updated_product_list.append(item)
+        
+        if not product_found:
+            updated_product_list.append(product_cookie_value)
+        
+        new_product_ids = '|'.join(updated_product_list)
+    else:
+        new_product_ids = product_cookie_value
+
+    encoded_product_ids = quote(new_product_ids)
+    response = redirect('cart')
+    response.set_cookie('product_ids', encoded_product_ids)
+
+    return response

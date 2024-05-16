@@ -45,24 +45,31 @@
         border-radius: 5px;
       }
 
-      .action-buttons button.addToCart {
-        background-color: #d4d3d1;
-        color: #555;
-      }
-
-      .action-buttons button.addToCart:hover {
-        background-color: #dcc79a;
-        color: #000;
-      }
-
+      .action-buttons button.addToCart,
       .action-buttons button.buyNow {
-        background-color: #dcc79a;
+        background-color: #dcc79a; /* Beige cremoso */
         color: #000;
+      }
+
+      .action-buttons button.addToCart:hover,
+      .action-buttons button.buyNow:hover {
+        background-color: #bfa984; /* Beige cremoso más oscuro */
+        color: #fff;
+      }
+
+      .action-buttons .btn-beige-crema {
+        background-color: #dcc79a; /* Beige cremoso */
+        color: #000;
+        border: none;
+      }
+
+      .action-buttons .btn-beige-crema:hover {
+        background-color: #bfa984; /* Beige cremoso más oscuro */
+        color: #fff;
       }
 
       .product-body {
         margin-left: 100px;
-        
       }
 
       .product-body img {
@@ -99,143 +106,137 @@
         top: 50%;
         transform: translateY(-50%);
       }
-
     </style>
   </head>
   <body>
     <div class="top-margin"></div>
     <div class="card mb-3">
-      
-        <div class="row g-0">
-            <div class="col-md-4">
-                <div class="product-body">
-                    <div class="card border-0">
-                        <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded-start">
-                    </div>
-                    
-
-                </div>
+      <div class="row g-0">
+        <div class="col-md-4">
+          <div class="product-body">
+            <div class="card border-0">
+              <img src="{% static product.product_image.url %}" alt="{{ product.name }}" class="img-fluid rounded-start">
             </div>
-
-            <div class="col-md-8">
-                <div class="product-body">
-                    <h5 class="fw-bold" style="font-size: 2rem;">
-                        {{ product.name }}
-                    </h5>
-                    <p class="product-description">{{ product.description }}</p>
-                    <h2>${{ product.price }} COP</h2>
-                    <h6>{{ product.category }}</h6>
-                    <div class="action-buttons mt-3">
-                        <div class="quantity-buttons">
-                            <button type="button" class="btn decreaseQuantity" onclick="reduceQuantity()">-</button>
-                            <span id="quantity" class="btn btn-outline-primary disabled">1</span>
-                            <button type="button" class="btn increaseQuantity" onclick="increaseQuantity()">+</button>
-                        </div>
-                    </div>
-                    <div class="quantity-available">
-                        <p>{% translate "Cantidad disponible" %}: {{ product.quantity }}</p>
-                    </div>
-                    {% if user.is_authenticated %}
-                    <div class="action-buttons mt-3">
-                      <a class="btn btn-outline-primary" href="{% url 'update-product' pk=product.id %}" role="button">
-                        <i class="fas fa-edit"></i> {% translate "Modificar producto" %}
-                      </a>
-                    </div>
-                    <div class="action-buttons mt-2">
-                      <a class="btn btn-outline-danger" href="{% url 'delete-product' pk=product.id %}" role="button" onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
-                        <i class="fas fa-trash-alt"></i> {% translate "Eliminar producto" %}
-                      </a>
-                    </div>
-                    
-                    {% else %}
-                    
-                    <div class="action-buttons mt-3 d-grid gap-2 d-md-block">
-                      <button type="button" class="btn btn-success" onclick="addToCart()">
-                        <i class="fas fa-cart-plus"></i> {% translate "Añadir al carrito" %}
-                      </button>
-                      
-                      <button type="button" class="btn btn-primary">
-                        <i class="fas fa-bolt"></i> {% translate "Comprar ahora" %}
-                      </button>
-                    
-                      {% if product.name == "Collar para perro" %}
-                        <a href="{% url 'create-collar' %}" class="btn btn-info" role="button">
-                          <i class="fas fa-paint-brush"></i> {% translate "Personalizar" %}
-                        </a>
-                      {% endif %}
-                    </div>
-                    
-                    {% endif %}
-                  
-                    {% if product.name == "Collar para perro" %}
-                      <h2>{% translate "Lista de collares" %}</h2>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>{% translate "ID del collar" %}</th>
-                                    <th>{% translate "Nombre del collar" %}</th>
-                                    <th>{% translate "Añadir" %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for collar in collar %}
-                                <tr>
-                                    <td>{{ collar.id }}</td>
-                                    <td>Collar {{ collar.id }}</td>
-                                    <td>
-                                      <a href="{% url 'add-to-cart' pk=product.id %}" class="btn btn-success" role="button">
-                                        <i class="fas fa-cart-plus"></i> {% translate "Añadir al carrito" %}
-                                    </a>
-                                    
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    {% endif%}
-                    <br>
-                </div>
-                
-            </div>
-            
+          </div>
         </div>
+
+        <div class="col-md-8">
+          <div class="product-body">
+            <h5 class="fw-bold" style="font-size: 2rem;">
+              {{ product.name }}
+            </h5>
+            <p class="product-description">{{ product.description }}</p>
+            <h2>${{ product.price }} COP</h2>
+            <h6>{{ product.category }}</h6>
+            <div class="action-buttons mt-3">
+              <div class="quantity-buttons">
+                <button type="button" class="btn decreaseQuantity" onclick="reduceQuantity()">-</button>
+                <span id="quantity" class="btn btn-outline-primary disabled">1</span>
+                <button type="button" class="btn increaseQuantity" onclick="increaseQuantity()">+</button>
+              </div>
+            </div>
+            <div class="quantity-available">
+              <p>{% translate "Cantidad disponible" %}: {{ product.quantity }}</p>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="action-buttons mt-3">
+              <a class="btn btn-beige-crema" href="{% url 'update-product' pk=product.id %}" role="button">
+                <i class="fas fa-edit"></i> {% translate "Modificar producto" %}
+              </a>
+            </div>
+            <div class="action-buttons mt-2">
+              <a class="btn btn-beige-crema" href="{% url 'delete-product' pk=product.id %}" role="button" onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
+                <i class="fas fa-trash-alt"></i> {% translate "Eliminar producto" %}
+              </a>
+            </div>
+            {% else %}
+            <div class="action-buttons mt-3 d-grid gap-2 d-md-block">
+              <button type="button" class="btn addToCart" onclick="addToCart()">
+                <i class="fas fa-cart-plus"></i> {% translate "Añadir al carrito" %}
+              </button>
+              <button type="button" class="btn buyNow" onclick="buyNow()">
+                <i class="fas fa-shopping-cart"></i> {% translate "Comprar ahora" %}
+              </button>
+              {% if product.name == "Collar para perro" %}
+                <a href="{% url 'create-collar' %}" class="btn btn-info" role="button">
+                  <i class="fas fa-paint-brush"></i> {% translate "Personalizar" %}
+                </a>
+              {% endif %}
+            </div>
+            {% endif %}
+            {% if product.name == "Collar para perro" %}
+              <h2>{% translate "Lista de collares" %}</h2>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>{% translate "ID del collar" %}</th>
+                    <th>{% translate "Nombre del collar" %}</th>
+                    <th>{% translate "Añadir" %}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for collar in collar %}
+                  <tr>
+                    <td>{{ collar.id }}</td>
+                    <td>Collar {{ collar.id }}</td>
+                    <td>
+                      <a href="{% url 'add-to-cart' pk=product.id %}" class="btn btn-success" role="button">
+                        <i class="fas fa-cart-plus"></i> {% translate "Añadir al carrito" %}
+                      </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% endif %}
+            <br>
+          </div>
+        </div>
+      </div>
     </div>
-    
+
     <script>
-        var quantity = 0;
-        var availableQuantity = {{ product.quantity }};
-        var quantityElement = document.getElementById('quantity');
-      
-        function reduceQuantity() {
-            if (quantity > 1) {
-                quantity--;
-                updateQuantity();
-            }
+      var quantity = 1;
+      var availableQuantity = {{ product.quantity }};
+      var quantityElement = document.getElementById('quantity');
+
+      function reduceQuantity() {
+        if (quantity > 1) {
+          quantity--;
+          updateQuantity();
         }
-      
-        function increaseQuantity() {
-            if (quantity < availableQuantity) {
-                quantity++;
-                updateQuantity();
-            } else {
-                // If the quantity is greater than available, do nothing
-            }
+      }
+
+      function increaseQuantity() {
+        if (quantity < availableQuantity) {
+          quantity++;
+          updateQuantity();
+        } else {
+          // If the quantity is greater than available, do nothing
         }
-      
-        function updateQuantity() {
-            quantityElement.innerText = quantity;
-      
-            // Add or remove the 'exceeded' class as needed
-            if (quantity > availableQuantity) {
-                quantityElement.classList.add('exceeded');
-            } else {
-                quantityElement.classList.remove('exceeded');
-            }
+      }
+
+      function updateQuantity() {
+        quantityElement.innerText = quantity;
+
+        // Add or remove the 'exceeded' class as needed
+        if (quantity > availableQuantity) {
+          quantityElement.classList.add('exceeded');
+        } else {
+          quantityElement.classList.remove('exceeded');
         }
-        function addToCart() {
-          var quantity = document.getElementById('quantity').innerText; 
-          var productId = '{{ product.id }}'; 
-          
-          window.location.href = `{% url 'add-to-cart' pk=product.id %}?quantity=` + quantity;
+      }
+
+      function addToCart() {
+        var quantity = document.getElementById('quantity').innerText;
+        var productId = '{{ product.id }}';
+        window.location.href = `{% url 'add-to-cart' pk=product.id %}?quantity=` + quantity;
+      }
+
+      function buyNow() {
+        var quantity = document.getElementById('quantity').innerText;
+        var productId = '{{ product.id }}';
+        window.location.href = `{% url 'buy-now' pk=product.id %}?quantity=` + quantity;
       }
     </script>
   </body>

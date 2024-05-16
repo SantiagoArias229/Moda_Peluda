@@ -36,6 +36,7 @@ urlpatterns = [
     path('login-account/', accountViews.login_account_view,name='login-account'),
     
     path('add-to-cart/<int:pk>', cartViews.add_to_cart_view,name='add-to-cart'),
+    path('buy-now/<int:pk>', cartViews.buy_now_view, name='buy-now'),
     path('cart', cartViews.cart_view,name='cart'),
     path('remove-from-cart/<int:pk>', cartViews.remove_from_cart_view,name='remove-from-cart'),
 

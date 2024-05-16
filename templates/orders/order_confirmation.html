@@ -1,11 +1,11 @@
-{% extends "base.html" %}  
+{% extends "base.html" %}
 {% load i18n %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Confirmación de Orden</title>
+    <title>{% translate "Confirmación de Orden" %}</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 </head>
 <body>
@@ -50,17 +50,9 @@
             <h5>Total: ${{ total }}</h5>
         </div>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" style="background-color: #dcc79a; #color: #000; border: none;" onclick="downloadConfirmation()">{% translate "Descargar confirmación: " %}</button>
-    <script>
-        function downloadConfirmation() {
-            html2canvas(document.getElementById("orderConfirmation")).then(function(canvas) {
-                var a = document.createElement('a');
-                a.href = canvas.toDataURL("image/png");
-                a.download = 'confirmacion-orden-' + '{{ order.id }}' + '.png';
-                a.click();
-            });
-        }
-    </script>
+    <button class="btn btn-lg btn-primary btn-block" style="background-color: #dcc79a; color: #000; border: none;" onclick="{{ screenshot_script }}">
+        {% translate "Descargar confirmación" %}
+    </button>
 </body>
 </html>
 {% endblock %}

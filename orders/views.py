@@ -1,24 +1,23 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from orders.models import Order
+from .models import Order
 from products.models import Product
 from .forms import OrderForm
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from urllib.parse import unquote
 from django.db.models.functions import TruncMonth
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.db.models import Count
-from .models import Order
 from django.conf import settings
 import paypalrestsdk
+from .services import ScreenshotService
 
 paypalrestsdk.configure({
     "mode": "sandbox",  # O "live" para entorno de producción
     "client_id": settings.PAYPAL_CLIENT_ID,
     "client_secret": settings.PAYPAL_CLIENT_SECRET,
 })
-
 
 def create_order(request):
     if request.method == 'POST':
@@ -36,7 +35,6 @@ def create_order(request):
             for product in products:
                 order.products.add(product)  
 
-
             response = HttpResponseRedirect(reverse('order_confirmation', args=(order.id,)))
             #response.delete_cookie('product_ids')
             return response
@@ -45,9 +43,7 @@ def create_order(request):
 
     return render(request, 'orders/order_form.html', {'form': form})
 
-
-
-
+# orders/views.py
 def order_confirmation(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     products = order.products.all()
@@ -77,11 +73,12 @@ def order_confirmation(request, order_id):
             total += subtotal
             products_with_quantities.append({'product': p, 'quantity': qty, 'subtotal': subtotal})
     
-
-    context = {'order': order, 'products': products,'products_with_quantities': products_with_quantities,'total': total,'product_count_in_cart': product_count_in_cart}
-    response = render(request, 'orders/order_comfirmation.html', context)
+    screenshot_script = ScreenshotService.capture_screenshot_script("orderConfirmation")
+    context = {'order': order, 'products': products, 'products_with_quantities': products_with_quantities, 'total': total, 'product_count_in_cart': product_count_in_cart, 'screenshot_script': screenshot_script}
+    response = render(request, 'orders/order_confirmation.html', context)
     response.delete_cookie('product_ids')  
     return response
+
 
 def view_stadistics(request):
     orders_per_month = Order.objects.annotate(month=TruncMonth('date')).values('month').annotate(total=Count('id')).order_by('month')
@@ -93,16 +90,16 @@ def view_stadistics(request):
     for order in all_orders:
         order['date'] = order['date'].strftime("%Y-%m-%d %H:%M:%S")
 
+    screenshot_script = ScreenshotService.capture_screenshot_script("statisticsContainer")
+
     context = {
         'months': json.dumps(months, cls=DjangoJSONEncoder),
         'totals': json.dumps(totals, cls=DjangoJSONEncoder),
         'orders': all_orders,  
+        'screenshot_script': screenshot_script,
     }
 
     return render(request, 'orders/order_stadistics.html', context)
-
-
-
 
 def payment_view(request):
     payment = paypalrestsdk.Payment({
