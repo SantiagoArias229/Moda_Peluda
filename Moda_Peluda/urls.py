@@ -20,6 +20,9 @@ from products import views as productViews
 from accounts import views as accountViews
 from cart import views as cartViews
 from orders import views as orderViews
+from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import gettext_lazy as _
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -51,3 +54,8 @@ urlpatterns = [
     # API #
     path('api/collares-creados/', productViews.get_personalized_collar_view, name='api_collares_stock'),
 ]
+
+urlpatterns += i18n_patterns(
+    path('set_language/', productViews.set_language, name='set_language'),
+
+)

@@ -6,6 +6,9 @@ from . import forms,models
 from django.db.models import Q
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
+from django.utils.translation import activate
+from django.conf import settings
+
 
 #Hecho por: Vanessa Velez Restrepo
 
@@ -102,3 +105,10 @@ def get_personalized_collar_view(request):
         'design': collar.design,
     } for collar in collares]
     return JsonResponse({'collares_personalizados': collares_json})
+
+def set_language(request):
+    lang_code = request.POST.get('language')
+    activate(lang_code)
+    response = redirect(request.POST.get('next'))
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)
+    return response

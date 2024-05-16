@@ -1,6 +1,6 @@
 {% load i18n %}
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -106,6 +106,22 @@
 </body>
 <footer class="footer">
     <div class="copyright py-4 text-center text-black"> 
+        <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+            <select name="language">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                        {{ language.name_local }} ({{ language.code }})
+                    </option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="{% trans 'Go' %}">
+        </form>
+
         <div class="container"> 
             <small> ModaPeluda-2024 Copyright - <a  href="https://twitter.com/gotaluism"> Luis Miguel</a> </small> 
             <small> - <a  href=""> Santiago Arias</a> </small>
